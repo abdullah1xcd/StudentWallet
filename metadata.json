@@ -1,0 +1,7 @@
+{
+  "name": "StudentWallet",
+  "description": "Student budget and personal finance manager to track income, expenses, and monthly budgets.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

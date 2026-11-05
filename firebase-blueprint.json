@@ -1,0 +1,174 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile document containing preference settings and identity.",
+      "type": "object",
+      "properties": {
+        "fullName": {
+          "type": "string",
+          "description": "Full display name of the student",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the student",
+          "format": "email",
+          "maxLength": 150
+        },
+        "currency": {
+          "type": "string",
+          "description": "Preferred display currency code",
+          "enum": ["EGP", "USD", "EUR", "GBP", "SAR", "AED"],
+          "maxLength": 5
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when the user account profile was created"
+        }
+      },
+      "required": ["fullName", "email", "currency", "createdAt"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Income or expense record created by a student.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of transaction",
+          "enum": ["income", "expense"]
+        },
+        "amount": {
+          "type": "number",
+          "description": "Financial amount in currency units, must be positive"
+        },
+        "categoryId": {
+          "type": "string",
+          "description": "Category identifier",
+          "maxLength": 64
+        },
+        "categoryName": {
+          "type": "string",
+          "description": "Category name for display",
+          "maxLength": 64
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief description of the transaction",
+          "maxLength": 200
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional notes or details",
+          "maxLength": 500
+        },
+        "date": {
+          "type": "string",
+          "description": "ISO date string or Firestore timestamp for transaction date"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last updated timestamp"
+        }
+      },
+      "required": ["type", "amount", "categoryId", "categoryName", "description", "date", "createdAt"]
+    },
+    "Budget": {
+      "title": "Budget",
+      "description": "Monthly spending budget limit for a specific month and year.",
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "description": "Monthly budget limit amount"
+        },
+        "month": {
+          "type": "number",
+          "description": "Calendar month (1-12)"
+        },
+        "year": {
+          "type": "number",
+          "description": "Calendar year"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last updated timestamp"
+        }
+      },
+      "required": ["amount", "month", "year", "createdAt"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Transaction category classification.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Category name",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "type": {
+          "type": "string",
+          "description": "Category transaction type",
+          "enum": ["income", "expense"]
+        },
+        "icon": {
+          "type": "string",
+          "description": "Lucide icon name identifier",
+          "maxLength": 50
+        },
+        "color": {
+          "type": "string",
+          "description": "Hex color code for badge and chart visualization",
+          "maxLength": 20
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "Whether this is a system default or student custom category"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        }
+      },
+      "required": ["name", "type", "icon", "color", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/User"
+      },
+      "description": "User profile documents stored by user UID"
+    },
+    "/users/{userId}/transactions/{transactionId}": {
+      "schema": {
+        "$ref": "#/entities/Transaction"
+      },
+      "description": "Income and expense transactions belonging to the user"
+    },
+    "/users/{userId}/budgets/{budgetId}": {
+      "schema": {
+        "$ref": "#/entities/Budget"
+      },
+      "description": "Monthly budgets belonging to the user (e.g. key: 2026-11)"
+    },
+    "/users/{userId}/categories/{categoryId}": {
+      "schema": {
+        "$ref": "#/entities/Category"
+      },
+      "description": "Default and custom categories for the user"
+    }
+  }
+}

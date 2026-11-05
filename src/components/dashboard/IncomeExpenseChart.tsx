@@ -21,13 +21,13 @@ export function IncomeExpenseChart({ data, currency }: IncomeExpenseChartProps) 
   const customTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-slate-900 text-white p-3 rounded-xl shadow-xl text-xs space-y-1.5 border border-slate-800">
-          <p className="font-bold text-slate-200">{label}</p>
-          <div className="flex items-center justify-between gap-4 text-emerald-400">
+        <div className="bg-[#102A2A] text-white p-3.5 rounded-xl shadow-xl text-xs space-y-1.5 border border-[#1A3D3D]">
+          <p className="font-bold text-[#C6A76A] tracking-wide">{label}</p>
+          <div className="flex items-center justify-between gap-4 text-[#35A875]">
             <span>Income:</span>
             <span className="font-semibold">{formatCurrency(payload[0]?.value || 0, currency)}</span>
           </div>
-          <div className="flex items-center justify-between gap-4 text-rose-400">
+          <div className="flex items-center justify-between gap-4 text-[#E47770]">
             <span>Expenses:</span>
             <span className="font-semibold">{formatCurrency(payload[1]?.value || 0, currency)}</span>
           </div>
@@ -41,9 +41,9 @@ export function IncomeExpenseChart({ data, currency }: IncomeExpenseChartProps) 
 
   if (!hasData) {
     return (
-      <div className="h-64 flex flex-col items-center justify-center text-center text-slate-400 text-xs">
+      <div className="h-64 flex flex-col items-center justify-center text-center text-[#78877F] text-xs">
         <p>No monthly activity recorded yet.</p>
-        <p className="text-[11px] text-slate-400 mt-1">Add transactions to visualize income vs expenses.</p>
+        <p className="text-[11px] text-[#78877F] mt-1">Add transactions to visualize income vs expenses.</p>
       </div>
     );
   }
@@ -52,16 +52,16 @@ export function IncomeExpenseChart({ data, currency }: IncomeExpenseChartProps) 
     <div className="h-72 w-full">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#EAE8E1" vertical={false} />
           <XAxis
             dataKey="monthName"
-            stroke="#94A3B8"
+            stroke="#78877F"
             fontSize={12}
             tickLine={false}
-            axisLine={{ stroke: '#E2E8F0' }}
+            axisLine={{ stroke: '#EAE8E1' }}
           />
           <YAxis
-            stroke="#94A3B8"
+            stroke="#78877F"
             fontSize={12}
             tickLine={false}
             axisLine={false}
@@ -72,19 +72,19 @@ export function IncomeExpenseChart({ data, currency }: IncomeExpenseChartProps) 
             verticalAlign="top"
             align="right"
             iconType="circle"
-            wrapperStyle={{ paddingBottom: 16, fontSize: 12 }}
+            wrapperStyle={{ paddingBottom: 16, fontSize: 12, color: '#78877F' }}
           />
           <Bar
             dataKey="income"
             name="Income"
-            fill="#16A34A"
+            fill="#35A875"
             radius={[6, 6, 0, 0]}
             maxBarSize={36}
           />
           <Bar
             dataKey="expenses"
             name="Expenses"
-            fill="#DC2626"
+            fill="#E47770"
             radius={[6, 6, 0, 0]}
             maxBarSize={36}
           />

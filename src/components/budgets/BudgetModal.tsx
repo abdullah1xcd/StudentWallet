@@ -88,12 +88,12 @@ export function BudgetModal({
       <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-4.5">
         {/* Amount */}
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
-            <Target className="w-3.5 h-3.5 text-slate-400" />
-            Monthly Budget Amount ({currency}) <span className="text-rose-500">*</span>
+          <label className="block text-xs font-bold uppercase tracking-wider text-[#202B29] mb-1.5 flex items-center gap-1.5">
+            <Target className="w-3.5 h-3.5 text-[#78877F]" />
+            Monthly Budget Amount ({currency}) <span className="text-[#E47770]">*</span>
           </label>
           <div className="relative">
-            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-400">
+            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm font-bold text-[#78877F]">
               {currency}
             </span>
             <input
@@ -102,15 +102,15 @@ export function BudgetModal({
               min="1"
               placeholder="e.g. 3000"
               {...register('amount', { valueAsNumber: true })}
-              className={`w-full pl-14 pr-4 py-2.5 bg-slate-50 border rounded-xl text-slate-900 text-lg font-bold focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all ${
-                errors.amount ? 'border-rose-400 ring-1 ring-rose-300' : 'border-slate-200'
+              className={`w-full pl-14 pr-4 py-2.5 bg-[#F5F3ED]/70 border rounded-xl text-[#202B29] text-lg font-bold focus:outline-hidden focus:ring-2 focus:ring-[#23866B] focus:bg-white transition-all ${
+                errors.amount ? 'border-[#E47770] ring-1 ring-[#E47770]/40' : 'border-[#EAE8E1]'
               }`}
             />
           </div>
           {errors.amount && (
-            <p className="text-xs text-rose-500 mt-1 font-medium">{errors.amount.message}</p>
+            <p className="text-xs text-[#E47770] mt-1 font-medium">{errors.amount.message}</p>
           )}
-          <p className="text-[11px] text-slate-400 mt-1">
+          <p className="text-[11px] text-[#78877F] mt-1">
             Tip: A common student budget in Egypt is 2,500 – 4,500 EGP per month.
           </p>
         </div>
@@ -118,14 +118,14 @@ export function BudgetModal({
         {/* Month & Year Selection */}
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5 text-slate-400" />
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#202B29] mb-1.5 flex items-center gap-1.5">
+              <Calendar className="w-3.5 h-3.5 text-[#78877F]" />
               Month
             </label>
             <select
               disabled={isEditing}
               {...register('month', { valueAsNumber: true })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full px-3 py-2 bg-[#F5F3ED]/70 border border-[#EAE8E1] rounded-xl text-sm text-[#202B29] focus:outline-hidden focus:ring-2 focus:ring-[#23866B] focus:bg-white transition-all disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {monthNames.map((name, idx) => (
                 <option key={idx + 1} value={idx + 1}>
@@ -136,13 +136,13 @@ export function BudgetModal({
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#202B29] mb-1.5">
               Year
             </label>
             <select
               disabled={isEditing}
               {...register('year', { valueAsNumber: true })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full px-3 py-2 bg-[#F5F3ED]/70 border border-[#EAE8E1] rounded-xl text-sm text-[#202B29] focus:outline-hidden focus:ring-2 focus:ring-[#23866B] focus:bg-white transition-all disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {[2024, 2025, 2026, 2027, 2028].map(yr => (
                 <option key={yr} value={yr}>
@@ -154,19 +154,19 @@ export function BudgetModal({
         </div>
 
         {/* Footer Actions */}
-        <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-100">
+        <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#EAE8E1]">
           <button
             type="button"
             onClick={onClose}
             disabled={isSubmitting}
-            className="px-4 py-2 text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors disabled:opacity-50"
+            className="px-4 py-2 text-sm font-semibold text-[#78877F] bg-[#F5F3ED] hover:bg-[#EAE8E1] rounded-xl transition-colors disabled:opacity-50"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-xs hover:shadow-md transition-all active:scale-98 disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-[#23866B] hover:bg-[#1C6C56] rounded-xl shadow-xs hover:shadow-md transition-all active:scale-98 disabled:opacity-50"
           >
             {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
             {isEditing ? 'Save Changes' : 'Save Monthly Budget'}

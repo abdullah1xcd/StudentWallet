@@ -114,10 +114,10 @@ export function CategoriesPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#202B29]">
             Category Management
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+          <p className="text-xs sm:text-sm text-[#78877F] mt-0.5">
             Organize university income streams and expenditure groupings.
           </p>
         </div>
@@ -127,7 +127,7 @@ export function CategoriesPage() {
             setEditingCategory(null);
             setIsModalOpen(true);
           }}
-          className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-xs hover:shadow-md transition-all active:scale-98 self-start sm:self-auto"
+          className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-white bg-[#23866B] hover:bg-[#1C6C56] rounded-xl shadow-xs hover:shadow-md transition-all active:scale-98 self-start sm:self-auto"
         >
           <PlusCircle className="w-4 h-4" />
           Create Category
@@ -135,14 +135,14 @@ export function CategoriesPage() {
       </div>
 
       {/* Tabs: Expense vs Income */}
-      <div className="flex items-center justify-between border-b border-slate-200">
+      <div className="flex items-center justify-between border-b border-[#EAE8E1]">
         <div className="flex gap-4">
           <button
             onClick={() => setActiveTab('expense')}
             className={`pb-3 text-sm font-bold border-b-2 transition-all ${
               activeTab === 'expense'
-                ? 'border-rose-600 text-rose-600'
-                : 'border-transparent text-slate-500 hover:text-slate-800'
+                ? 'border-[#E47770] text-[#E47770]'
+                : 'border-transparent text-[#78877F] hover:text-[#202B29]'
             }`}
           >
             Expense Categories ({categories.filter(c => c.type === 'expense').length})
@@ -151,8 +151,8 @@ export function CategoriesPage() {
             onClick={() => setActiveTab('income')}
             className={`pb-3 text-sm font-bold border-b-2 transition-all ${
               activeTab === 'income'
-                ? 'border-emerald-600 text-emerald-600'
-                : 'border-transparent text-slate-500 hover:text-slate-800'
+                ? 'border-[#35A875] text-[#35A875]'
+                : 'border-transparent text-[#78877F] hover:text-[#202B29]'
             }`}
           >
             Income Categories ({categories.filter(c => c.type === 'income').length})
@@ -164,7 +164,7 @@ export function CategoriesPage() {
       {loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {[1, 2, 3, 4, 5, 6].map(i => (
-            <div key={i} className="p-4 bg-white rounded-2xl border border-slate-100 shadow-xs space-y-3">
+            <div key={i} className="p-4 bg-white rounded-2xl border border-[#EAE8E1] shadow-xs space-y-3">
               <Skeleton className="w-10 h-10 rounded-xl" />
               <Skeleton className="h-4 w-28" />
             </div>
@@ -175,7 +175,7 @@ export function CategoriesPage() {
           {filteredCategories.map(cat => (
             <div
               key={cat.id}
-              className="bg-white p-4.5 rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md transition-all flex items-center justify-between group"
+              className="bg-white p-4.5 rounded-2xl border border-[#EAE8E1] shadow-xs hover:shadow-md transition-all flex items-center justify-between group"
             >
               <div className="flex items-center gap-3 min-w-0">
                 <div
@@ -185,8 +185,8 @@ export function CategoriesPage() {
                   <CategoryIcon name={cat.icon} className="w-5 h-5 text-white" />
                 </div>
                 <div className="min-w-0">
-                  <h4 className="font-bold text-slate-900 text-sm truncate">{cat.name}</h4>
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 block mt-0.5">
+                  <h4 className="font-bold text-[#202B29] text-sm truncate">{cat.name}</h4>
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-[#78877F] block mt-0.5">
                     {cat.isDefault ? 'Default' : 'Custom'}
                   </span>
                 </div>
@@ -199,7 +199,7 @@ export function CategoriesPage() {
                     setEditingCategory(cat);
                     setIsModalOpen(true);
                   }}
-                  className="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  className="p-1.5 text-[#78877F] hover:text-[#23866B] hover:bg-[#102A2A]/5 rounded-lg transition-colors"
                   title="Edit category"
                 >
                   <Edit3 className="w-4 h-4" />
@@ -208,7 +208,7 @@ export function CategoriesPage() {
                 {!cat.isDefault && (
                   <button
                     onClick={() => handleDeleteRequest(cat)}
-                    className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
+                    className="p-1.5 text-[#78877F] hover:text-[#E47770] hover:bg-[#FDF1F0] rounded-lg transition-colors"
                     title="Delete category"
                   >
                     <Trash2 className="w-4 h-4" />

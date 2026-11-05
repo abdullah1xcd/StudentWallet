@@ -1,1 +1,24 @@
 @import "tailwindcss";
+
+@theme {
+  --color-ivory: #F5F3ED;
+  --color-midnight: #102A2A;
+  --color-emerald-deep: #23866B;
+  --color-emerald-hover: #1C6C56;
+  --color-gold: #C6A76A;
+  --color-gold-light: #F7F3E9;
+  --color-charcoal: #202B29;
+  --color-sage: #78877F;
+  --color-income: #35A875;
+  --color-income-light: #EBF6F0;
+  --color-expense: #E47770;
+  --color-expense-light: #FDF1F0;
+  --color-warning: #E8AC4A;
+  --color-warning-light: #FDF6E9;
+}
+
+body {
+  background-color: #F5F3ED;
+  color: #202B29;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}

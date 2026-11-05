@@ -175,17 +175,17 @@ export function ReportsPage() {
       {/* Top Header & Export */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#202B29]">
             Financial Reports & Analytics
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+          <p className="text-xs sm:text-sm text-[#78877F] mt-0.5">
             Deep dive into your university spending patterns, savings rate, and category allocation.
           </p>
         </div>
 
         <button
           onClick={handleExport}
-          className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-xs hover:shadow-md transition-all active:scale-98 self-start sm:self-auto"
+          className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-white bg-[#23866B] hover:bg-[#1C6C56] rounded-xl shadow-xs hover:shadow-md transition-all active:scale-98 self-start sm:self-auto"
         >
           <Download className="w-4 h-4" />
           Export Report CSV
@@ -193,9 +193,9 @@ export function ReportsPage() {
       </div>
 
       {/* Date Period Filter Pills */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs space-y-3">
+      <div className="bg-white p-4 rounded-2xl border border-[#EAE8E1] shadow-xs space-y-3">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-bold text-slate-500 uppercase tracking-wider mr-2">
+          <span className="text-xs font-bold text-[#78877F] uppercase tracking-wider mr-2">
             Timeframe:
           </span>
           {[
@@ -210,8 +210,8 @@ export function ReportsPage() {
               onClick={() => setPeriod(p.id as ReportPeriod)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all ${
                 period === p.id
-                  ? 'bg-blue-600 text-white shadow-xs'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  ? 'bg-[#23866B] text-white shadow-xs'
+                  : 'bg-[#F5F3ED] text-[#202B29] hover:bg-[#EAE8E1]'
               }`}
             >
               {p.label}
@@ -221,23 +221,23 @@ export function ReportsPage() {
 
         {/* Custom Date Pickers */}
         {period === 'custom' && (
-          <div className="pt-2 flex flex-wrap items-center gap-3 text-xs border-t border-slate-100">
+          <div className="pt-2 flex flex-wrap items-center gap-3 text-xs border-t border-[#EAE8E1]">
             <div className="flex items-center gap-2">
-              <span className="text-slate-500 font-medium">From:</span>
+              <span className="text-[#78877F] font-medium">From:</span>
               <input
                 type="date"
                 value={customStartDate}
                 onChange={e => setCustomStartDate(e.target.value)}
-                className="px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-800"
+                className="px-2.5 py-1.5 bg-[#F5F3ED]/70 border border-[#EAE8E1] rounded-lg text-[#202B29]"
               />
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-slate-500 font-medium">To:</span>
+              <span className="text-[#78877F] font-medium">To:</span>
               <input
                 type="date"
                 value={customEndDate}
                 onChange={e => setCustomEndDate(e.target.value)}
-                className="px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-800"
+                className="px-2.5 py-1.5 bg-[#F5F3ED]/70 border border-[#EAE8E1] rounded-lg text-[#202B29]"
               />
             </div>
           </div>
@@ -247,46 +247,46 @@ export function ReportsPage() {
       {/* Monthly Financial Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Total Income */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+        <div className="bg-white p-5 rounded-2xl border border-[#EAE8E1] shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#78877F]">
               Total Income
             </span>
-            <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+            <div className="w-9 h-9 rounded-xl bg-[#EBF6F0] text-[#35A875] flex items-center justify-center">
               <TrendingUp className="w-5 h-5" />
             </div>
           </div>
-          <p className="text-2xl font-extrabold text-slate-900 mt-2">
+          <p className="text-2xl font-extrabold text-[#35A875] mt-2">
             {formatCurrency(totalIncome, currency)}
           </p>
-          <p className="text-xs text-slate-400 mt-1">Period total earnings</p>
+          <p className="text-xs text-[#78877F] mt-1">Period total earnings</p>
         </div>
 
         {/* Total Expenses */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+        <div className="bg-white p-5 rounded-2xl border border-[#EAE8E1] shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#78877F]">
               Total Expenses
             </span>
-            <div className="w-9 h-9 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center">
+            <div className="w-9 h-9 rounded-xl bg-[#FDF1F0] text-[#E47770] flex items-center justify-center">
               <TrendingDown className="w-5 h-5" />
             </div>
           </div>
-          <p className="text-2xl font-extrabold text-slate-900 mt-2">
+          <p className="text-2xl font-extrabold text-[#E47770] mt-2">
             {formatCurrency(totalExpenses, currency)}
           </p>
-          <p className="text-xs text-slate-400 mt-1">Period expenditures</p>
+          <p className="text-xs text-[#78877F] mt-1">Period expenditures</p>
         </div>
 
         {/* Net Balance */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+        <div className="bg-white p-5 rounded-2xl border border-[#EAE8E1] shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#78877F]">
               Net Balance
             </span>
             <div
               className={`w-9 h-9 rounded-xl flex items-center justify-center ${
-                netBalance >= 0 ? 'bg-blue-50 text-blue-600' : 'bg-rose-50 text-rose-600'
+                netBalance >= 0 ? 'bg-[#EBF6F0] text-[#35A875]' : 'bg-[#FDF1F0] text-[#E47770]'
               }`}
             >
               <DollarSign className="w-5 h-5" />
@@ -294,52 +294,52 @@ export function ReportsPage() {
           </div>
           <p
             className={`text-2xl font-extrabold mt-2 ${
-              netBalance >= 0 ? 'text-blue-600' : 'text-rose-600'
+              netBalance >= 0 ? 'text-[#35A875]' : 'text-[#E47770]'
             }`}
           >
             {formatCurrency(netBalance, currency)}
           </p>
-          <p className="text-xs text-slate-400 mt-1">Income minus expenses</p>
+          <p className="text-xs text-[#78877F] mt-1">Income minus expenses</p>
         </div>
 
         {/* Savings Amount */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+        <div className="bg-white p-5 rounded-2xl border border-[#EAE8E1] shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#78877F]">
               Savings Amount
             </span>
-            <div className="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
+            <div className="w-9 h-9 rounded-xl bg-[#C6A76A]/15 text-[#C6A76A] flex items-center justify-center">
               <PiggyBank className="w-5 h-5" />
             </div>
           </div>
-          <p className="text-2xl font-extrabold text-purple-700 mt-2">
+          <p className="text-2xl font-extrabold text-[#202B29] mt-2">
             {formatCurrency(savingsAmount, currency)}
           </p>
-          <p className="text-xs text-purple-600 font-semibold mt-1">
+          <p className="text-xs text-[#C6A76A] font-semibold mt-1">
             {savingsRate}% savings rate
           </p>
         </div>
       </div>
 
       {/* Monthly Comparison Grid (Current Month vs Previous Month) */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
+      <div className="bg-white p-6 rounded-2xl border border-[#EAE8E1] shadow-xs space-y-4">
         <div>
-          <h3 className="text-base font-bold text-slate-900">Monthly Performance Comparison</h3>
-          <p className="text-xs text-slate-500">
+          <h3 className="text-base font-bold text-[#202B29]">Monthly Performance Comparison</h3>
+          <p className="text-xs text-[#78877F]">
             Comparing {formatMonthName(cmMonth, cmYear)} vs {formatMonthName(pmMonth, pmYear)}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Income Comparison */}
-          <div className="p-4 rounded-xl bg-slate-50/70 border border-slate-100 flex items-center justify-between">
+          <div className="p-4 rounded-xl bg-[#F5F3ED]/70 border border-[#EAE8E1] flex items-center justify-between">
             <div>
-              <span className="text-xs font-semibold text-slate-500 block">Monthly Income</span>
+              <span className="text-xs font-semibold text-[#78877F] block">Monthly Income</span>
               <div className="flex items-baseline gap-2 mt-1">
-                <span className="text-xl font-bold text-slate-900">
+                <span className="text-xl font-bold text-[#202B29]">
                   {formatCurrency(comparison.currentMonthIncome, currency)}
                 </span>
-                <span className="text-xs text-slate-400">
+                <span className="text-xs text-[#78877F]">
                   vs {formatCurrency(comparison.previousMonthIncome, currency)} last month
                 </span>
               </div>
@@ -349,8 +349,8 @@ export function ReportsPage() {
               <div
                 className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold ${
                   comparison.incomeGrowthPercent >= 0
-                    ? 'bg-emerald-50 text-emerald-700'
-                    : 'bg-rose-50 text-rose-700'
+                    ? 'bg-[#EBF6F0] text-[#35A875]'
+                    : 'bg-[#FDF1F0] text-[#E47770]'
                 }`}
               >
                 {comparison.incomeGrowthPercent >= 0 ? (
@@ -364,14 +364,14 @@ export function ReportsPage() {
           </div>
 
           {/* Expense Comparison */}
-          <div className="p-4 rounded-xl bg-slate-50/70 border border-slate-100 flex items-center justify-between">
+          <div className="p-4 rounded-xl bg-[#F5F3ED]/70 border border-[#EAE8E1] flex items-center justify-between">
             <div>
-              <span className="text-xs font-semibold text-slate-500 block">Monthly Expenses</span>
+              <span className="text-xs font-semibold text-[#78877F] block">Monthly Expenses</span>
               <div className="flex items-baseline gap-2 mt-1">
-                <span className="text-xl font-bold text-slate-900">
+                <span className="text-xl font-bold text-[#202B29]">
                   {formatCurrency(comparison.currentMonthExpenses, currency)}
                 </span>
-                <span className="text-xs text-slate-400">
+                <span className="text-xs text-[#78877F]">
                   vs {formatCurrency(comparison.previousMonthExpenses, currency)} last month
                 </span>
               </div>
@@ -381,8 +381,8 @@ export function ReportsPage() {
               <div
                 className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold ${
                   comparison.expenseGrowthPercent <= 0
-                    ? 'bg-emerald-50 text-emerald-700'
-                    : 'bg-rose-50 text-rose-700'
+                    ? 'bg-[#EBF6F0] text-[#35A875]'
+                    : 'bg-[#FDF1F0] text-[#E47770]'
                 }`}
               >
                 {comparison.expenseGrowthPercent > 0 ? (
@@ -399,58 +399,58 @@ export function ReportsPage() {
 
       {/* Expense Breakdown by Category */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-1 bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
+        <div className="lg:col-span-1 bg-white p-6 rounded-2xl border border-[#EAE8E1] shadow-xs space-y-4">
           <div>
-            <h3 className="text-base font-bold text-slate-900">Category Proportions</h3>
-            <p className="text-xs text-slate-500">Distribution across chosen timeframe</p>
+            <h3 className="text-base font-bold text-[#202B29]">Category Proportions</h3>
+            <p className="text-xs text-[#78877F]">Distribution across chosen timeframe</p>
           </div>
           <ExpenseDistributionChart data={categoryBreakdown} currency={currency} />
         </div>
 
         {/* Detailed Category Table */}
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
-          <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center">
+        <div className="lg:col-span-2 bg-white rounded-2xl border border-[#EAE8E1] shadow-xs overflow-hidden">
+          <div className="px-6 py-4 border-b border-[#EAE8E1] flex justify-between items-center">
             <div>
-              <h3 className="text-base font-bold text-slate-900">Expense Breakdown by Category</h3>
-              <p className="text-xs text-slate-500">Ranked by highest total spending</p>
+              <h3 className="text-base font-bold text-[#202B29]">Expense Breakdown by Category</h3>
+              <p className="text-xs text-[#78877F]">Ranked by highest total spending</p>
             </div>
-            <span className="text-xs font-semibold text-slate-400">
+            <span className="text-xs font-semibold text-[#78877F]">
               {categoryBreakdown.length} Categories
             </span>
           </div>
 
           {categoryBreakdown.length === 0 ? (
-            <div className="p-8 text-center text-xs text-slate-400">
+            <div className="p-8 text-center text-xs text-[#78877F]">
               No expenses recorded for this timeframe.
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse text-sm">
                 <thead>
-                  <tr className="bg-slate-50/75 border-b border-slate-100 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                  <tr className="bg-[#F5F3ED]/60 border-b border-[#EAE8E1] text-[11px] font-bold uppercase tracking-wider text-[#78877F]">
                     <th className="py-3 px-6">Category</th>
                     <th className="py-3 px-4">Transactions</th>
                     <th className="py-3 px-4">Amount</th>
                     <th className="py-3 px-6 text-right">Share</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-[#EAE8E1]">
                   {categoryBreakdown.map(item => (
-                    <tr key={item.categoryId} className="hover:bg-slate-50/50">
-                      <td className="py-3.5 px-6 font-semibold text-slate-800 flex items-center gap-2.5">
+                    <tr key={item.categoryId} className="hover:bg-[#F5F3ED]/40">
+                      <td className="py-3.5 px-6 font-semibold text-[#202B29] flex items-center gap-2.5">
                         <span
                           className="w-3 h-3 rounded-full shrink-0"
                           style={{ backgroundColor: item.color }}
                         />
                         {item.categoryName}
                       </td>
-                      <td className="py-3.5 px-4 text-xs text-slate-500">
+                      <td className="py-3.5 px-4 text-xs text-[#78877F]">
                         {item.count} record{item.count === 1 ? '' : 's'}
                       </td>
-                      <td className="py-3.5 px-4 font-bold text-slate-900">
+                      <td className="py-3.5 px-4 font-bold text-[#202B29]">
                         {formatCurrency(item.amount, currency)}
                       </td>
-                      <td className="py-3.5 px-6 text-right font-semibold text-slate-700">
+                      <td className="py-3.5 px-6 text-right font-semibold text-[#202B29]">
                         {item.percentage}%
                       </td>
                     </tr>

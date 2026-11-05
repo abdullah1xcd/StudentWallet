@@ -41,24 +41,24 @@ export function Modal({
 
       {/* Modal Dialog */}
       <div
-        className={`relative w-full ${maxWidth} bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden transform transition-all z-10 my-8`}
+        className={`relative w-full ${maxWidth} bg-white rounded-2xl shadow-2xl border border-[#EAE8E1] overflow-hidden transform transition-all z-10 my-8`}
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-headline"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4.5 border-b border-slate-100">
+        <div className="flex items-center justify-between px-6 py-4.5 border-b border-[#EAE8E1]">
           <div>
-            <h3 id="modal-headline" className="text-lg font-bold text-slate-900">
+            <h3 id="modal-headline" className="text-lg font-bold text-[#202B29]">
               {title}
             </h3>
             {description && (
-              <p className="text-xs text-slate-500 mt-0.5">{description}</p>
+              <p className="text-xs text-[#78877F] mt-0.5">{description}</p>
             )}
           </div>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100 transition-colors"
+            className="text-[#78877F] hover:text-[#202B29] p-1.5 rounded-lg hover:bg-[#F5F3ED] transition-colors"
             aria-label="Close dialog"
           >
             <X className="w-5 h-5" />

@@ -20,9 +20,9 @@ export function MonthlyTrendChart({ data, currency }: MonthlyTrendChartProps) {
   const customTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-slate-900 text-white p-3 rounded-xl shadow-xl text-xs space-y-1.5 border border-slate-800">
-          <p className="font-bold text-slate-200">{label}</p>
-          <div className="flex items-center justify-between gap-4 text-rose-400">
+        <div className="bg-[#102A2A] text-white p-3.5 rounded-xl shadow-xl text-xs space-y-1.5 border border-[#1A3D3D]">
+          <p className="font-bold text-[#C6A76A]">{label}</p>
+          <div className="flex items-center justify-between gap-4 text-[#E47770]">
             <span>Expenses:</span>
             <span className="font-semibold">{formatCurrency(payload[0]?.value || 0, currency)}</span>
           </div>
@@ -36,7 +36,7 @@ export function MonthlyTrendChart({ data, currency }: MonthlyTrendChartProps) {
 
   if (!hasData) {
     return (
-      <div className="h-56 flex flex-col items-center justify-center text-center text-slate-400 text-xs">
+      <div className="h-56 flex flex-col items-center justify-center text-center text-[#78877F] text-xs">
         <p>No monthly spending trend data yet.</p>
       </div>
     );
@@ -46,16 +46,16 @@ export function MonthlyTrendChart({ data, currency }: MonthlyTrendChartProps) {
     <div className="h-56 w-full">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#EAE8E1" vertical={false} />
           <XAxis
             dataKey="monthName"
-            stroke="#94A3B8"
+            stroke="#78877F"
             fontSize={12}
             tickLine={false}
-            axisLine={{ stroke: '#E2E8F0' }}
+            axisLine={{ stroke: '#EAE8E1' }}
           />
           <YAxis
-            stroke="#94A3B8"
+            stroke="#78877F"
             fontSize={12}
             tickLine={false}
             axisLine={false}
@@ -66,10 +66,10 @@ export function MonthlyTrendChart({ data, currency }: MonthlyTrendChartProps) {
             type="monotone"
             dataKey="expenses"
             name="Expenses"
-            stroke="#DC2626"
+            stroke="#23866B"
             strokeWidth={3}
-            dot={{ r: 4, fill: '#DC2626', strokeWidth: 2, stroke: '#FFFFFF' }}
-            activeDot={{ r: 6 }}
+            dot={{ r: 4, fill: '#23866B', strokeWidth: 2, stroke: '#FFFFFF' }}
+            activeDot={{ r: 6, fill: '#C6A76A' }}
           />
         </LineChart>
       </ResponsiveContainer>

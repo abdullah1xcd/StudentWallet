@@ -101,56 +101,56 @@ export function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#F5F3ED] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center space-y-3">
         {/* Logo */}
         <Link to="/" className="inline-flex items-center gap-2.5">
-          <div className="w-11 h-11 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
-            <Wallet className="w-6 h-6" />
+          <div className="w-11 h-11 rounded-xl bg-[#102A2A] flex items-center justify-center text-[#C6A76A] shadow-md shadow-[#102A2A]/20 border border-[#C6A76A]/30">
+            <Wallet className="w-6 h-6 text-[#C6A76A]" />
           </div>
-          <span className="text-2xl font-black text-slate-900 tracking-tight">
-            Student<span className="text-blue-600">Wallet</span>
+          <span className="text-2xl font-black text-[#202B29] tracking-tight">
+            Student<span className="text-[#23866B]">Wallet</span>
           </span>
         </Link>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#202B29] tracking-tight">
           Welcome Back, Student
         </h2>
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-[#78877F]">
           New to StudentWallet?{' '}
-          <Link to="/register" className="font-semibold text-blue-600 hover:text-blue-700">
+          <Link to="/register" className="font-semibold text-[#23866B] hover:text-[#1C6C56]">
             Create an account
           </Link>
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-6 sm:px-8 shadow-xl rounded-2xl border border-slate-200/80 space-y-6">
+        <div className="bg-white py-8 px-6 sm:px-8 shadow-xl rounded-2xl border border-[#EAE8E1] space-y-6">
           {/* Error Banner */}
           {authError && (
-            <div className="p-3.5 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 font-medium">
+            <div className="p-3.5 bg-[#FDF1F0] border border-[#E47770]/30 rounded-xl text-xs text-[#E47770] font-medium">
               {authError}
             </div>
           )}
 
           {/* Auto Sign-In Banner */}
-          <div className="p-4 bg-blue-50/80 border border-blue-200/80 rounded-2xl space-y-2.5">
+          <div className="p-4 bg-[#F5F3ED] border border-[#EAE8E1] rounded-2xl space-y-2.5">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-blue-700">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#23866B]">
                 Connected Firebase Account
               </span>
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-600 text-white">
+              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-[#23866B] text-white">
                 AUTO
               </span>
             </div>
             <div>
-              <p className="text-sm font-bold text-slate-900">Abdullah Mohamed Haroon</p>
-              <p className="text-xs text-slate-500 font-mono">abdullahmohamedharoon8@gmail.com</p>
+              <p className="text-sm font-bold text-[#202B29]">Abdullah Mohamed Haroon</p>
+              <p className="text-xs text-[#78877F] font-mono">abdullahmohamedharoon8@gmail.com</p>
             </div>
             <button
               type="button"
               onClick={handleInstantAutoSignIn}
               disabled={isAutoLoading || isSubmitting}
-              className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-xs hover:shadow-md transition-all active:scale-98 disabled:opacity-50"
+              className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 bg-[#23866B] hover:bg-[#1C6C56] text-white text-xs font-bold rounded-xl shadow-xs hover:shadow-md transition-all active:scale-98 disabled:opacity-50"
             >
               {isAutoLoading && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
               Sign In to My Account Instantly
@@ -162,10 +162,10 @@ export function LoginPage() {
             type="button"
             onClick={handleGoogleLogin}
             disabled={isGoogleLoading || isSubmitting || isAutoLoading}
-            className="w-full inline-flex justify-center items-center gap-3 py-2.5 px-4 border border-slate-200 rounded-xl shadow-2xs bg-white text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors disabled:opacity-50"
+            className="w-full inline-flex justify-center items-center gap-3 py-2.5 px-4 border border-[#EAE8E1] rounded-xl shadow-2xs bg-white text-sm font-semibold text-[#202B29] hover:bg-[#F5F3ED] transition-colors disabled:opacity-50"
           >
             {isGoogleLoading ? (
-              <Loader2 className="w-4 h-4 animate-spin text-blue-600" />
+              <Loader2 className="w-4 h-4 animate-spin text-[#23866B]" />
             ) : (
               <svg className="w-4 h-4" viewBox="0 0 24 24">
                 <path
@@ -190,42 +190,42 @@ export function LoginPage() {
           </button>
 
           <div className="relative flex py-1 items-center">
-            <div className="flex-grow border-t border-slate-200" />
-            <span className="shrink mx-4 text-xs font-semibold text-slate-400 uppercase">
+            <div className="flex-grow border-t border-[#EAE8E1]" />
+            <span className="shrink mx-4 text-xs font-semibold text-[#78877F] uppercase">
               Or with email
             </span>
-            <div className="flex-grow border-t border-slate-200" />
+            <div className="flex-grow border-t border-[#EAE8E1]" />
           </div>
 
           {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* Email */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#202B29] mb-1.5">
                 Email Address
               </label>
               <input
                 type="email"
                 placeholder="student@university.edu"
                 {...register('email')}
-                className={`w-full px-3.5 py-2.5 bg-slate-50 border rounded-xl text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all ${
-                  errors.email ? 'border-rose-400 ring-1 ring-rose-300' : 'border-slate-200'
+                className={`w-full px-3.5 py-2.5 bg-[#F5F3ED]/70 border rounded-xl text-sm text-[#202B29] focus:outline-hidden focus:ring-2 focus:ring-[#23866B] focus:bg-white transition-all ${
+                  errors.email ? 'border-[#E47770] ring-1 ring-[#E47770]/40' : 'border-[#EAE8E1]'
                 }`}
               />
               {errors.email && (
-                <p className="text-xs text-rose-500 mt-1 font-medium">{errors.email.message}</p>
+                <p className="text-xs text-[#E47770] mt-1 font-medium">{errors.email.message}</p>
               )}
             </div>
 
             {/* Password */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#202B29]">
                   Password
                 </label>
                 <Link
                   to="/forgot-password"
-                  className="text-xs font-semibold text-blue-600 hover:text-blue-700"
+                  className="text-xs font-semibold text-[#23866B] hover:text-[#1C6C56]"
                 >
                   Forgot password?
                 </Link>
@@ -235,28 +235,28 @@ export function LoginPage() {
                   type={showPassword ? 'text' : 'password'}
                   placeholder="••••••••"
                   {...register('password')}
-                  className={`w-full pl-3.5 pr-10 py-2.5 bg-slate-50 border rounded-xl text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all ${
-                    errors.password ? 'border-rose-400 ring-1 ring-rose-300' : 'border-slate-200'
+                  className={`w-full pl-3.5 pr-10 py-2.5 bg-[#F5F3ED]/70 border rounded-xl text-sm text-[#202B29] focus:outline-hidden focus:ring-2 focus:ring-[#23866B] focus:bg-white transition-all ${
+                    errors.password ? 'border-[#E47770] ring-1 ring-[#E47770]/40' : 'border-[#EAE8E1]'
                   }`}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#78877F] hover:text-[#202B29]"
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
               {errors.password && (
-                <p className="text-xs text-rose-500 mt-1 font-medium">{errors.password.message}</p>
+                <p className="text-xs text-[#E47770] mt-1 font-medium">{errors.password.message}</p>
               )}
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting || isGoogleLoading}
-              className="w-full mt-2 inline-flex items-center justify-center gap-2 py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl shadow-md shadow-blue-500/20 hover:shadow-blue-500/30 transition-all active:scale-98 disabled:opacity-50"
+              className="w-full mt-2 inline-flex items-center justify-center gap-2 py-3 px-4 bg-[#23866B] hover:bg-[#1C6C56] text-white text-sm font-bold rounded-xl shadow-md shadow-[#23866B]/20 hover:shadow-[#23866B]/30 transition-all active:scale-98 disabled:opacity-50"
             >
               {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
               Sign In to StudentWallet

@@ -133,14 +133,14 @@ export function TransactionModal({
     >
       <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-4.5">
         {/* Type Toggle */}
-        <div className="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl">
+        <div className="grid grid-cols-2 gap-2 p-1 bg-[#F5F3ED] rounded-xl border border-[#EAE8E1]">
           <button
             type="button"
             onClick={() => handleTypeChange('expense')}
             className={`flex items-center justify-center gap-2 py-2 rounded-lg text-xs font-bold transition-all ${
               selectedType === 'expense'
-                ? 'bg-rose-600 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-[#E47770] text-white shadow-xs'
+                : 'text-[#78877F] hover:text-[#202B29]'
             }`}
           >
             <TrendingDown className="w-4 h-4" />
@@ -151,8 +151,8 @@ export function TransactionModal({
             onClick={() => handleTypeChange('income')}
             className={`flex items-center justify-center gap-2 py-2 rounded-lg text-xs font-bold transition-all ${
               selectedType === 'income'
-                ? 'bg-emerald-600 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-[#35A875] text-white shadow-xs'
+                : 'text-[#78877F] hover:text-[#202B29]'
             }`}
           >
             <TrendingUp className="w-4 h-4" />
@@ -162,11 +162,11 @@ export function TransactionModal({
 
         {/* Amount Input */}
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-            Amount ({currency}) <span className="text-rose-500">*</span>
+          <label className="block text-xs font-bold uppercase tracking-wider text-[#202B29] mb-1.5">
+            Amount ({currency}) <span className="text-[#E47770]">*</span>
           </label>
           <div className="relative">
-            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-400">
+            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm font-bold text-[#C6A76A]">
               {currency}
             </span>
             <input
@@ -175,28 +175,28 @@ export function TransactionModal({
               min="0.01"
               placeholder="0.00"
               {...register('amount', { valueAsNumber: true })}
-              className={`w-full pl-14 pr-4 py-2.5 bg-slate-50 border rounded-xl text-slate-900 text-lg font-bold focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all ${
-                errors.amount ? 'border-rose-400 ring-1 ring-rose-300' : 'border-slate-200'
+              className={`w-full pl-14 pr-4 py-2.5 bg-[#F5F3ED] border rounded-xl text-[#202B29] text-lg font-bold focus:outline-hidden focus:ring-2 focus:ring-[#23866B] focus:bg-white transition-all ${
+                errors.amount ? 'border-[#E47770] ring-1 ring-[#E47770]/40' : 'border-[#EAE8E1]'
               }`}
             />
           </div>
           {errors.amount && (
-            <p className="text-xs text-rose-500 mt-1 font-medium">{errors.amount.message}</p>
+            <p className="text-xs text-[#E47770] mt-1 font-medium">{errors.amount.message}</p>
           )}
         </div>
 
         {/* Category & Date */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
-              <Tag className="w-3.5 h-3.5 text-slate-400" />
-              Category <span className="text-rose-500">*</span>
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#202B29] mb-1.5 flex items-center gap-1.5">
+              <Tag className="w-3.5 h-3.5 text-[#78877F]" />
+              Category <span className="text-[#E47770]">*</span>
             </label>
             <select
               value={watch('categoryId')}
               onChange={handleCategorySelect}
-              className={`w-full px-3.5 py-2.5 bg-slate-50 border rounded-xl text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all ${
-                errors.categoryId ? 'border-rose-400 ring-1 ring-rose-300' : 'border-slate-200'
+              className={`w-full px-3.5 py-2.5 bg-[#F5F3ED] border rounded-xl text-sm text-[#202B29] focus:outline-hidden focus:ring-2 focus:ring-[#23866B] focus:bg-white transition-all ${
+                errors.categoryId ? 'border-[#E47770] ring-1 ring-[#E47770]/40' : 'border-[#EAE8E1]'
               }`}
             >
               <option value="">Select a category</option>
@@ -207,75 +207,75 @@ export function TransactionModal({
               ))}
             </select>
             {errors.categoryId && (
-              <p className="text-xs text-rose-500 mt-1 font-medium">{errors.categoryId.message}</p>
+              <p className="text-xs text-[#E47770] mt-1 font-medium">{errors.categoryId.message}</p>
             )}
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5 text-slate-400" />
-              Date <span className="text-rose-500">*</span>
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#202B29] mb-1.5 flex items-center gap-1.5">
+              <Calendar className="w-3.5 h-3.5 text-[#78877F]" />
+              Date <span className="text-[#E47770]">*</span>
             </label>
             <input
               type="date"
               {...register('date')}
-              className={`w-full px-3.5 py-2.5 bg-slate-50 border rounded-xl text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all ${
-                errors.date ? 'border-rose-400 ring-1 ring-rose-300' : 'border-slate-200'
+              className={`w-full px-3.5 py-2.5 bg-[#F5F3ED] border rounded-xl text-sm text-[#202B29] focus:outline-hidden focus:ring-2 focus:ring-[#23866B] focus:bg-white transition-all ${
+                errors.date ? 'border-[#E47770] ring-1 ring-[#E47770]/40' : 'border-[#EAE8E1]'
               }`}
             />
             {errors.date && (
-              <p className="text-xs text-rose-500 mt-1 font-medium">{errors.date.message}</p>
+              <p className="text-xs text-[#E47770] mt-1 font-medium">{errors.date.message}</p>
             )}
           </div>
         </div>
 
         {/* Description */}
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
-            <FileText className="w-3.5 h-3.5 text-slate-400" />
-            Description <span className="text-rose-500">*</span>
+          <label className="block text-xs font-bold uppercase tracking-wider text-[#202B29] mb-1.5 flex items-center gap-1.5">
+            <FileText className="w-3.5 h-3.5 text-[#78877F]" />
+            Description <span className="text-[#E47770]">*</span>
           </label>
           <input
             type="text"
             placeholder="e.g. Lunch at campus cafeteria, textbook purchase"
             {...register('description')}
-            className={`w-full px-3.5 py-2.5 bg-slate-50 border rounded-xl text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all ${
-              errors.description ? 'border-rose-400 ring-1 ring-rose-300' : 'border-slate-200'
+            className={`w-full px-3.5 py-2.5 bg-[#F5F3ED] border rounded-xl text-sm text-[#202B29] focus:outline-hidden focus:ring-2 focus:ring-[#23866B] focus:bg-white transition-all ${
+              errors.description ? 'border-[#E47770] ring-1 ring-[#E47770]/40' : 'border-[#EAE8E1]'
             }`}
           />
           {errors.description && (
-            <p className="text-xs text-rose-500 mt-1 font-medium">{errors.description.message}</p>
+            <p className="text-xs text-[#E47770] mt-1 font-medium">{errors.description.message}</p>
           )}
         </div>
 
         {/* Notes */}
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
-            <AlignLeft className="w-3.5 h-3.5 text-slate-400" />
+          <label className="block text-xs font-bold uppercase tracking-wider text-[#202B29] mb-1.5 flex items-center gap-1.5">
+            <AlignLeft className="w-3.5 h-3.5 text-[#78877F]" />
             Notes (Optional)
           </label>
           <textarea
             rows={2}
             placeholder="Add any extra details or receipt reference..."
             {...register('notes')}
-            className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all resize-none"
+            className="w-full px-3.5 py-2.5 bg-[#F5F3ED] border border-[#EAE8E1] rounded-xl text-sm text-[#202B29] focus:outline-hidden focus:ring-2 focus:ring-[#23866B] focus:bg-white transition-all resize-none"
           />
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-100">
+        <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#EAE8E1]">
           <button
             type="button"
             onClick={onClose}
             disabled={isSubmitting}
-            className="px-4 py-2 text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors disabled:opacity-50"
+            className="px-4 py-2 text-sm font-semibold text-[#78877F] bg-[#F5F3ED] hover:bg-[#EAE8E1] rounded-xl transition-colors disabled:opacity-50"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-xs hover:shadow-md transition-all active:scale-98 disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-[#23866B] hover:bg-[#1C6C56] rounded-xl shadow-xs hover:shadow-md transition-all active:scale-98 disabled:opacity-50"
           >
             {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
             {isEditing ? 'Save Changes' : 'Record Transaction'}

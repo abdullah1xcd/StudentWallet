@@ -141,19 +141,19 @@ export function DashboardPage() {
   return (
     <div className="space-y-6">
       {/* Top Controls: Month Selector & Quick Action Buttons */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white p-4.5 rounded-2xl border border-slate-200/80 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white p-4.5 rounded-2xl border border-[#EAE8E1] shadow-xs">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-[#F7F3E9] text-[#C6A76A] flex items-center justify-center shrink-0">
             <Calendar className="w-5 h-5" />
           </div>
           <div>
-            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400">
+            <label className="block text-[10px] font-bold uppercase tracking-wider text-[#78877F]">
               Selected Period
             </label>
             <select
               value={selectedMonthKey}
               onChange={e => setSelectedMonthKey(e.target.value)}
-              className="mt-0.5 text-sm sm:text-base font-extrabold text-slate-900 bg-transparent border-none cursor-pointer focus:outline-hidden focus:ring-0 pl-0 pr-6 py-0"
+              className="mt-0.5 text-sm sm:text-base font-extrabold text-[#202B29] bg-transparent border-none cursor-pointer focus:outline-hidden focus:ring-0 pl-0 pr-6 py-0"
             >
               {monthOptions.map(m => (
                 <option key={m.key} value={m.key}>
@@ -167,15 +167,15 @@ export function DashboardPage() {
         <div className="flex items-center gap-2.5">
           <button
             onClick={() => setIsBudgetModalOpen(true)}
-            className="inline-flex items-center gap-2 px-3.5 py-2.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors"
+            className="inline-flex items-center gap-2 px-3.5 py-2.5 text-xs font-semibold text-[#202B29] bg-[#F5F3ED] hover:bg-[#EAE8E1] rounded-xl transition-colors border border-[#EAE8E1]"
           >
-            <Target className="w-4 h-4 text-slate-500" />
+            <Target className="w-4 h-4 text-[#C6A76A]" />
             {currentBudget ? 'Edit Budget' : 'Set Budget'}
           </button>
 
           <button
             onClick={() => setIsTxModalOpen(true)}
-            className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-xs hover:shadow-md transition-all active:scale-98"
+            className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-white bg-[#23866B] hover:bg-[#1C6C56] rounded-xl shadow-xs hover:shadow-md transition-all active:scale-98"
           >
             <PlusCircle className="w-4 h-4" />
             Add Transaction
@@ -189,22 +189,22 @@ export function DashboardPage() {
       {/* Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Income vs Expenses Bar Chart */}
-        <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
+        <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-[#EAE8E1] shadow-xs space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-bold text-slate-900">Income vs Expenses</h3>
-              <p className="text-xs text-slate-500">6-Month historical comparison</p>
+              <h3 className="text-base font-bold text-[#202B29]">Income vs Expenses</h3>
+              <p className="text-xs text-[#78877F]">6-Month historical comparison</p>
             </div>
-            <span className="text-xs font-semibold text-slate-400">Live Analytics</span>
+            <span className="text-xs font-semibold text-[#C6A76A]">Live Analytics</span>
           </div>
           <IncomeExpenseChart data={trendData} currency={currency} />
         </div>
 
         {/* Expense Distribution Donut Chart */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
+        <div className="bg-white p-6 rounded-2xl border border-[#EAE8E1] shadow-xs space-y-4">
           <div>
-            <h3 className="text-base font-bold text-slate-900">Expense Distribution</h3>
-            <p className="text-xs text-slate-500">Breakdown for selected month</p>
+            <h3 className="text-base font-bold text-[#202B29]">Expense Distribution</h3>
+            <p className="text-xs text-[#78877F]">Breakdown for selected month</p>
           </div>
           <ExpenseDistributionChart data={categoryBreakdown} currency={currency} />
         </div>
@@ -223,10 +223,10 @@ export function DashboardPage() {
         </div>
 
         {/* Monthly Spending Trend Line Chart */}
-        <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
+        <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-[#EAE8E1] shadow-xs space-y-4">
           <div>
-            <h3 className="text-base font-bold text-slate-900">Monthly Spending Trend</h3>
-            <p className="text-xs text-slate-500">Expense trajectory over previous months</p>
+            <h3 className="text-base font-bold text-[#202B29]">Monthly Spending Trend</h3>
+            <p className="text-xs text-[#78877F]">Expense trajectory over previous months</p>
           </div>
           <MonthlyTrendChart data={trendData} currency={currency} />
         </div>

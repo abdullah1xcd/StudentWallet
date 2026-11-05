@@ -23,7 +23,7 @@ export function DashboardLayout({ budgetWarningMessage }: DashboardLayoutProps) 
   const title = getPageTitle(location.pathname);
 
   return (
-    <div className="min-h-screen bg-slate-50 flex">
+    <div className="min-h-screen bg-[#F5F3ED] flex">
       {/* Sidebar */}
       <Sidebar
         isOpen={mobileSidebarOpen}

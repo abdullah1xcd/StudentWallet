@@ -31,13 +31,13 @@ export function BudgetHistory({
   });
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
-      <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+    <div className="bg-white rounded-2xl border border-[#EAE8E1] shadow-xs overflow-hidden">
+      <div className="px-6 py-4 border-b border-[#EAE8E1] flex items-center justify-between">
         <div>
-          <h3 className="text-base font-bold text-slate-900">Budget History</h3>
-          <p className="text-xs text-slate-500">Overview of all configured monthly budgets</p>
+          <h3 className="text-base font-bold text-[#202B29]">Budget History</h3>
+          <p className="text-xs text-[#78877F]">Overview of all configured monthly budgets</p>
         </div>
-        <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-lg">
+        <span className="text-xs font-semibold text-[#78877F] bg-[#F5F3ED] px-2.5 py-1 rounded-lg">
           {budgets.length} Record{budgets.length === 1 ? '' : 's'}
         </span>
       </div>
@@ -45,7 +45,7 @@ export function BudgetHistory({
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-slate-50/75 border-b border-slate-100 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            <tr className="bg-[#F5F3ED]/60 border-b border-[#EAE8E1] text-[11px] font-bold uppercase tracking-wider text-[#78877F]">
               <th className="py-3 px-6">Month & Year</th>
               <th className="py-3 px-4">Budget Limit</th>
               <th className="py-3 px-4">Total Spent</th>
@@ -55,7 +55,7 @@ export function BudgetHistory({
               <th className="py-3 px-6 text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 text-sm">
+          <tbody className="divide-y divide-[#EAE8E1] text-sm">
             {sorted.map(b => {
               const monthKey = `${b.year}-${String(b.month).padStart(2, '0')}`;
               const spent = calculateMonthlyExpenses(transactions, monthKey);
@@ -64,30 +64,36 @@ export function BudgetHistory({
               const pct = Math.round((spent / b.amount) * 100);
 
               return (
-                <tr key={b.id} className="hover:bg-slate-50/50 transition-colors">
-                  <td className="py-3.5 px-6 font-semibold text-slate-900 flex items-center gap-2">
-                    <Calendar className="w-4 h-4 text-slate-400" />
+                <tr key={b.id} className="hover:bg-[#F5F3ED]/40 transition-colors">
+                  <td className="py-3.5 px-6 font-semibold text-[#202B29] flex items-center gap-2">
+                    <Calendar className="w-4 h-4 text-[#78877F]" />
                     {formatMonthName(b.month, b.year)}
                   </td>
-                  <td className="py-3.5 px-4 font-bold text-slate-800">
+                  <td className="py-3.5 px-4 font-bold text-[#202B29]">
                     {formatCurrency(b.amount, currency)}
                   </td>
-                  <td className="py-3.5 px-4 text-slate-600">
+                  <td className="py-3.5 px-4 text-[#78877F]">
                     {formatCurrency(spent, currency)}
                   </td>
                   <td
                     className={`py-3.5 px-4 font-semibold ${
-                      remaining >= 0 ? 'text-blue-600' : 'text-rose-600'
+                      remaining >= 0 ? 'text-[#35A875]' : 'text-[#E47770]'
                     }`}
                   >
                     {formatCurrency(remaining, currency)}
                   </td>
-                  <td className="py-3.5 px-4 font-medium text-slate-700">
+                  <td className="py-3.5 px-4 font-medium text-[#202B29]">
                     {pct}%
                   </td>
                   <td className="py-3.5 px-4">
                     <span
-                      className={`inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold border ${status.badgeClass}`}
+                      className={`inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold border ${
+                        status.level === 'exceeded'
+                          ? 'bg-[#FDF1F0] text-[#E47770] border-[#E47770]/30'
+                          : status.level === 'warning'
+                          ? 'bg-[#FDF6E9] text-[#E8AC4A] border-[#E8AC4A]/30'
+                          : 'bg-[#EBF6F0] text-[#35A875] border-[#35A875]/30'
+                      }`}
                     >
                       {status.label}
                     </span>
@@ -96,14 +102,14 @@ export function BudgetHistory({
                     <div className="flex items-center justify-end gap-1">
                       <button
                         onClick={() => onEdit(b)}
-                        className="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                        className="p-1.5 text-[#78877F] hover:text-[#23866B] hover:bg-[#102A2A]/5 rounded-lg transition-colors"
                         title="Edit budget"
                       >
                         <Edit3 className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => onDelete(b.id)}
-                        className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
+                        className="p-1.5 text-[#78877F] hover:text-[#E47770] hover:bg-[#FDF1F0] rounded-lg transition-colors"
                         title="Delete budget"
                       >
                         <Trash2 className="w-4 h-4" />

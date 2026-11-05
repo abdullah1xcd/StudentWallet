@@ -115,21 +115,21 @@ export function BudgetsPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#202B29]">
             Monthly Budget Management
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+          <p className="text-xs sm:text-sm text-[#78877F] mt-0.5">
             Set and track spending boundaries for every month of the university year.
           </p>
         </div>
 
         {/* Month selector dropdown */}
-        <div className="flex items-center gap-2 bg-white px-3.5 py-2 rounded-xl border border-slate-200/80 shadow-2xs">
-          <Calendar className="w-4 h-4 text-slate-400" />
+        <div className="flex items-center gap-2 bg-white px-3.5 py-2 rounded-xl border border-[#EAE8E1] shadow-2xs">
+          <Calendar className="w-4 h-4 text-[#78877F]" />
           <select
             value={selectedMonthKey}
             onChange={e => setSelectedMonthKey(e.target.value)}
-            className="text-xs sm:text-sm font-bold text-slate-800 bg-transparent border-none cursor-pointer focus:outline-hidden"
+            className="text-xs sm:text-sm font-bold text-[#202B29] bg-transparent border-none cursor-pointer focus:outline-hidden"
           >
             {monthOptions.map(m => (
               <option key={m.key} value={m.key}>

@@ -90,8 +90,90 @@ export function TransactionTable({
         </div>
       </div>
 
-      {/* Table */}
-      <div className="overflow-x-auto">
+      {/* Mobile Card List View (Visible on small screens) */}
+      <div className="md:hidden divide-y divide-[#EAE8E1]">
+        {transactions.map(tx => {
+          const isIncome = tx.type === 'income';
+          return (
+            <div key={tx.id} className="p-4 space-y-3 bg-white hover:bg-[#F5F3ED]/30 transition-colors">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div
+                    className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
+                      isIncome
+                        ? 'bg-[#EBF6F0] text-[#35A875]'
+                        : 'bg-[#FDF1F0] text-[#E47770]'
+                    }`}
+                  >
+                    {isIncome ? (
+                      <TrendingUp className="w-4 h-4" />
+                    ) : (
+                      <TrendingDown className="w-4 h-4" />
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="font-bold text-sm text-[#202B29] truncate">
+                      {tx.description}
+                    </p>
+                    <p className="text-[11px] text-[#78877F]">{formatDateDisplay(tx.date)}</p>
+                  </div>
+                </div>
+
+                <div className="text-right shrink-0">
+                  <p
+                    className={`font-black text-base ${
+                      isIncome ? 'text-[#35A875]' : 'text-[#202B29]'
+                    }`}
+                  >
+                    {isIncome ? '+' : '-'} {formatCurrency(tx.amount, currency)}
+                  </p>
+                  <span
+                    className={`inline-flex items-center px-1.5 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider mt-0.5 ${
+                      isIncome
+                        ? 'bg-[#EBF6F0] text-[#35A875]'
+                        : 'bg-[#FDF1F0] text-[#E47770]'
+                    }`}
+                  >
+                    {tx.type}
+                  </span>
+                </div>
+              </div>
+
+              {tx.notes && (
+                <p className="text-xs text-[#78877F] bg-[#F5F3ED]/60 p-2 rounded-lg leading-relaxed">
+                  {tx.notes}
+                </p>
+              )}
+
+              <div className="flex items-center justify-between pt-1 border-t border-[#EAE8E1]/60 text-xs">
+                <span className="inline-flex items-center px-2 py-0.5 rounded-lg font-medium bg-[#F5F3ED] text-[#202B29] border border-[#EAE8E1]">
+                  {tx.categoryName}
+                </span>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => onEdit(tx)}
+                    className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold text-[#202B29] bg-[#F5F3ED] hover:bg-[#EAE8E1] rounded-lg transition-colors border border-[#EAE8E1]"
+                  >
+                    <Edit2 className="w-3.5 h-3.5 text-[#23866B]" />
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => setDeletingTx(tx)}
+                    className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold text-[#E47770] bg-[#FDF1F0] hover:bg-[#FBE4E3] rounded-lg transition-colors border border-[#E47770]/20"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Desktop Table View (Hidden on mobile) */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-[#F5F3ED]/60 border-b border-[#EAE8E1] text-[11px] font-bold uppercase tracking-wider text-[#78877F]">

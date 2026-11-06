@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
+import { BottomNavigation } from './BottomNavigation';
 
 interface DashboardLayoutProps {
   budgetWarningMessage?: string | null;
@@ -24,23 +25,26 @@ export function DashboardLayout({ budgetWarningMessage }: DashboardLayoutProps) 
 
   return (
     <div className="min-h-screen bg-[#F5F3ED] flex">
-      {/* Sidebar */}
+      {/* Sidebar for Desktop & Drawer for Mobile */}
       <Sidebar
         isOpen={mobileSidebarOpen}
         onClose={() => setMobileSidebarOpen(false)}
       />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 pb-16 lg:pb-0">
         <Header
           title={title}
           onOpenMobileMenu={() => setMobileSidebarOpen(true)}
           budgetWarningMessage={budgetWarningMessage}
         />
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
+        <main className="flex-1 p-3.5 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
           <Outlet />
         </main>
       </div>
+
+      {/* Mobile Bottom Navigation Bar */}
+      <BottomNavigation />
     </div>
   );
 }

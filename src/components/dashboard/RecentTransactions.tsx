@@ -54,90 +54,146 @@ export function RecentTransactions({
           onAction={onAddTransaction}
         />
       ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-[#F5F3ED]/60 border-b border-[#EAE8E1] text-[11px] font-bold uppercase tracking-wider text-[#78877F]">
-                <th className="py-3 px-6">Description</th>
-                <th className="py-3 px-4">Category</th>
-                <th className="py-3 px-4">Date</th>
-                <th className="py-3 px-4">Type</th>
-                <th className="py-3 px-6 text-right">Amount</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#EAE8E1] text-sm">
-              {latestFive.map(tx => {
-                const isIncome = tx.type === 'income';
-                return (
-                  <tr key={tx.id} className="hover:bg-[#F5F3ED]/40 transition-colors">
-                    {/* Description */}
-                    <td className="py-3.5 px-6">
-                      <div className="flex items-center gap-3">
-                        <div
-                          className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
-                            isIncome
-                              ? 'bg-[#EBF6F0] text-[#35A875]'
-                              : 'bg-[#FDF1F0] text-[#E47770]'
-                          }`}
-                        >
-                          {isIncome ? (
-                            <TrendingUp className="w-4 h-4" />
-                          ) : (
-                            <TrendingDown className="w-4 h-4" />
-                          )}
-                        </div>
-                        <div className="min-w-0">
-                          <p className="font-semibold text-[#202B29] truncate max-w-[200px]">
-                            {tx.description}
-                          </p>
-                          {tx.notes && (
-                            <p className="text-[11px] text-[#78877F] truncate max-w-[200px]">
-                              {tx.notes}
-                            </p>
-                          )}
-                        </div>
+        <>
+          {/* Mobile Card List (Hidden on desktop) */}
+          <div className="sm:hidden divide-y divide-[#EAE8E1]">
+            {latestFive.map(tx => {
+              const isIncome = tx.type === 'income';
+              return (
+                <div key={tx.id} className="p-3.5 flex items-center justify-between gap-3 hover:bg-[#F5F3ED]/30 transition-colors">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div
+                      className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
+                        isIncome
+                          ? 'bg-[#EBF6F0] text-[#35A875]'
+                          : 'bg-[#FDF1F0] text-[#E47770]'
+                      }`}
+                    >
+                      {isIncome ? (
+                        <TrendingUp className="w-4 h-4" />
+                      ) : (
+                        <TrendingDown className="w-4 h-4" />
+                      )}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="font-bold text-sm text-[#202B29] truncate">{tx.description}</p>
+                      <div className="flex items-center gap-2 mt-0.5 text-[11px] text-[#78877F]">
+                        <span>{tx.categoryName}</span>
+                        <span>•</span>
+                        <span>{formatDateDisplay(tx.date)}</span>
                       </div>
-                    </td>
+                    </div>
+                  </div>
 
-                    {/* Category */}
-                    <td className="py-3.5 px-4">
-                      <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium bg-[#F5F3ED] text-[#202B29] border border-[#EAE8E1]">
-                        {tx.categoryName}
-                      </span>
-                    </td>
-
-                    {/* Date */}
-                    <td className="py-3.5 px-4 text-xs text-[#78877F] whitespace-nowrap">
-                      {formatDateDisplay(tx.date)}
-                    </td>
-
-                    {/* Type */}
-                    <td className="py-3.5 px-4">
-                      <span
-                        className={`inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold uppercase tracking-wider ${
-                          isIncome
-                            ? 'bg-[#EBF6F0] text-[#35A875] border border-[#35A875]/30'
-                            : 'bg-[#FDF1F0] text-[#E47770] border border-[#E47770]/30'
-                        }`}
-                      >
-                        {tx.type}
-                      </span>
-                    </td>
-
-                    {/* Amount */}
-                    <td
-                      className={`py-3.5 px-6 text-right font-black whitespace-nowrap ${
+                  <div className="text-right shrink-0">
+                    <p
+                      className={`font-black text-sm ${
                         isIncome ? 'text-[#35A875]' : 'text-[#202B29]'
                       }`}
                     >
                       {isIncome ? '+' : '-'} {formatCurrency(tx.amount, currency)}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+                    </p>
+                    <span
+                      className={`inline-flex items-center px-1.5 py-0.5 rounded-md text-[9px] font-bold uppercase tracking-wider mt-0.5 ${
+                        isIncome
+                          ? 'bg-[#EBF6F0] text-[#35A875]'
+                          : 'bg-[#FDF1F0] text-[#E47770]'
+                      }`}
+                    >
+                      {tx.type}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Desktop Table (Hidden on small mobile) */}
+          <div className="hidden sm:block overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-[#F5F3ED]/60 border-b border-[#EAE8E1] text-[11px] font-bold uppercase tracking-wider text-[#78877F]">
+                  <th className="py-3 px-6">Description</th>
+                  <th className="py-3 px-4">Category</th>
+                  <th className="py-3 px-4">Date</th>
+                  <th className="py-3 px-4">Type</th>
+                  <th className="py-3 px-6 text-right">Amount</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#EAE8E1] text-sm">
+                {latestFive.map(tx => {
+                  const isIncome = tx.type === 'income';
+                  return (
+                    <tr key={tx.id} className="hover:bg-[#F5F3ED]/40 transition-colors">
+                      {/* Description */}
+                      <td className="py-3.5 px-6">
+                        <div className="flex items-center gap-3">
+                          <div
+                            className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
+                              isIncome
+                                ? 'bg-[#EBF6F0] text-[#35A875]'
+                                : 'bg-[#FDF1F0] text-[#E47770]'
+                            }`}
+                          >
+                            {isIncome ? (
+                              <TrendingUp className="w-4 h-4" />
+                            ) : (
+                              <TrendingDown className="w-4 h-4" />
+                            )}
+                          </div>
+                          <div className="min-w-0">
+                            <p className="font-semibold text-[#202B29] truncate max-w-[200px]">
+                              {tx.description}
+                            </p>
+                            {tx.notes && (
+                              <p className="text-[11px] text-[#78877F] truncate max-w-[200px]">
+                                {tx.notes}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </td>
+
+                      {/* Category */}
+                      <td className="py-3.5 px-4">
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium bg-[#F5F3ED] text-[#202B29] border border-[#EAE8E1]">
+                          {tx.categoryName}
+                        </span>
+                      </td>
+
+                      {/* Date */}
+                      <td className="py-3.5 px-4 text-xs text-[#78877F] whitespace-nowrap">
+                        {formatDateDisplay(tx.date)}
+                      </td>
+
+                      {/* Type */}
+                      <td className="py-3.5 px-4">
+                        <span
+                          className={`inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold uppercase tracking-wider ${
+                            isIncome
+                              ? 'bg-[#EBF6F0] text-[#35A875] border border-[#35A875]/30'
+                              : 'bg-[#FDF1F0] text-[#E47770] border border-[#E47770]/30'
+                          }`}
+                        >
+                          {tx.type}
+                        </span>
+                      </td>
+
+                      {/* Amount */}
+                      <td
+                        className={`py-3.5 px-6 text-right font-black whitespace-nowrap ${
+                          isIncome ? 'text-[#35A875]' : 'text-[#202B29]'
+                        }`}
+                      >
+                        {isIncome ? '+' : '-'} {formatCurrency(tx.amount, currency)}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </>
       )}
     </div>
   );

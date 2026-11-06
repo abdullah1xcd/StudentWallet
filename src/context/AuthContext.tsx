@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
 import { auth } from '../services/firebase';
-import { getUserProfile, updateUserProfile, autoSignInDefaultStudent } from '../services/authService';
+import { getUserProfile, updateUserProfile } from '../services/authService';
 import { initializeDefaultCategories } from '../services/categoryService';
 import { UserProfile, CurrencyCode } from '../types';
 
@@ -12,7 +12,6 @@ interface AuthContextType {
   loading: boolean;
   refreshProfile: () => Promise<void>;
   updateCurrency: (newCurrency: CurrencyCode) => Promise<void>;
-  autoSignIn: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -41,15 +40,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       await initializeDefaultCategories(user.uid);
     } catch (err) {
       console.error('Failed to load profile or initialize categories:', err);
-    }
-  }, []);
-
-  const handleAutoSignIn = useCallback(async () => {
-    try {
-      sessionStorage.removeItem('studentwallet_manual_signout');
-      await autoSignInDefaultStudent();
-    } catch (e) {
-      console.error('Auto sign-in execution failed:', e);
     }
   }, []);
 
@@ -113,7 +103,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         loading,
         refreshProfile,
         updateCurrency,
-        autoSignIn: handleAutoSignIn,
       }}
     >
       {children}

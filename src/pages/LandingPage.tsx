@@ -283,7 +283,7 @@ export function LandingPage() {
               </div>
               <h4 className="text-base font-bold text-[#202B29]">Create your account</h4>
               <p className="text-xs text-[#78877F] leading-relaxed">
-                Sign up with your university email or automatic sign-in to create your personal encrypted financial vault.
+                Sign up with your university email or Google account to create your personal encrypted financial vault.
               </p>
             </div>
 

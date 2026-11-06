@@ -20,36 +20,6 @@ import { UserProfile, CurrencyCode } from '../types';
 
 const googleProvider = new GoogleAuthProvider();
 
-export const DEFAULT_STUDENT_EMAIL = 'abdullahmohamedharoon8@gmail.com';
-export const DEFAULT_STUDENT_NAME = 'Abdullah Mohamed Haroon';
-export const DEFAULT_STUDENT_PASS = 'StudentWallet2026!';
-
-export async function autoSignInDefaultStudent(): Promise<void> {
-  try {
-    await signInWithEmailAndPassword(auth, DEFAULT_STUDENT_EMAIL, DEFAULT_STUDENT_PASS);
-  } catch (err: any) {
-    if (
-      err.code === 'auth/user-not-found' ||
-      err.code === 'auth/invalid-credential' ||
-      err.code === 'auth/invalid-login-credentials'
-    ) {
-      // Account does not exist yet with this default credential, register automatically
-      try {
-        await registerWithEmail(
-          DEFAULT_STUDENT_NAME,
-          DEFAULT_STUDENT_EMAIL,
-          DEFAULT_STUDENT_PASS,
-          'EGP'
-        );
-      } catch (regErr) {
-        console.warn('Auto registration notice:', regErr);
-      }
-    } else {
-      console.warn('Auto sign-in notice:', err);
-    }
-  }
-}
-
 export async function registerWithEmail(
   fullName: string,
   email: string,
@@ -177,8 +147,5 @@ export async function changeUserPassword(newPassword: string): Promise<void> {
 }
 
 export async function logoutUser(): Promise<void> {
-  if (typeof sessionStorage !== 'undefined') {
-    sessionStorage.setItem('studentwallet_manual_signout', 'true');
-  }
   await signOut(auth);
 }

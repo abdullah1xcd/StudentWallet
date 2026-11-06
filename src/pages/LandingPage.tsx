@@ -48,16 +48,12 @@ export function LandingPage() {
             {/* Hero CTAs */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2">
               <button
-                onClick={async () => {
-                  if (currentUser) {
-                    navigate('/dashboard');
-                  } else {
-                    navigate('/dashboard');
-                  }
+                onClick={() => {
+                  navigate(currentUser ? '/dashboard' : '/login');
                 }}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-[#23866B] hover:bg-[#1C6C56] text-white font-bold text-base rounded-xl shadow-lg shadow-[#23866B]/25 hover:shadow-[#23866B]/40 transition-all active:scale-98"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-[#23866B] hover:bg-[#1C6C56] text-white font-bold text-base rounded-xl shadow-lg shadow-[#23866B]/25 hover:shadow-[#23866B]/40 transition-all active:scale-98 cursor-pointer"
               >
-                Go to Student Dashboard
+                {currentUser ? 'Go to Student Dashboard' : 'Get Started with Google'}
                 <ArrowRight className="w-4 h-4" />
               </button>
 

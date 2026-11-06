@@ -67,17 +67,24 @@ export async function loginWithGoogle(): Promise<UserProfile> {
   try {
     const snap = await getDoc(userDocRef);
     if (!snap.exists()) {
-      const profileData: Omit<UserProfile, 'uid'> = {
-        fullName: user.displayName || 'Student',
-        email: user.email || '',
+      const cleanName = (user.displayName || user.email?.split('@')[0] || 'Student').trim();
+      const profileData: Record<string, any> = {
+        fullName: cleanName.length >= 2 ? cleanName : 'Student',
+        email: (user.email || '').trim().toLowerCase(),
         currency: 'EGP',
-        photoURL: user.photoURL || undefined,
         createdAt: new Date().toISOString(),
       };
+      if (user.photoURL) {
+        profileData.photoURL = user.photoURL;
+      }
       await setDoc(userDocRef, profileData);
       return {
         uid: user.uid,
-        ...profileData,
+        fullName: profileData.fullName,
+        email: profileData.email,
+        currency: profileData.currency,
+        photoURL: profileData.photoURL,
+        createdAt: profileData.createdAt,
       };
     } else {
       const data = snap.data();

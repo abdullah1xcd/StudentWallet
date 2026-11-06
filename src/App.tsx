@@ -14,7 +14,6 @@ import { DashboardLayout } from './components/layout/DashboardLayout';
 import { LandingPage } from './pages/LandingPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { LoginPage } from './pages/LoginPage';
-import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { TransactionsPage } from './pages/TransactionsPage';
 import { BudgetsPage } from './pages/BudgetsPage';
@@ -33,7 +32,7 @@ export default function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/forgot-password" element={<Navigate to="/login" replace />} />
 
             {/* Protected Dashboard Routes */}
             <Route

@@ -44,13 +44,23 @@ export function Navbar() {
 
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-3">
-          <button
-            onClick={() => navigate('/dashboard')}
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#23866B] hover:bg-[#1C6C56] text-white text-sm font-semibold rounded-xl shadow-xs hover:shadow-md transition-all active:scale-98"
-          >
-            Go to Dashboard
-            <ArrowRight className="w-4 h-4" />
-          </button>
+          {currentUser ? (
+            <button
+              onClick={() => navigate('/dashboard')}
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#23866B] hover:bg-[#1C6C56] text-white text-sm font-semibold rounded-xl shadow-xs hover:shadow-md transition-all active:scale-98 cursor-pointer"
+            >
+              Go to Dashboard
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          ) : (
+            <button
+              onClick={() => navigate('/login')}
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#23866B] hover:bg-[#1C6C56] text-white text-sm font-semibold rounded-xl shadow-xs hover:shadow-md transition-all active:scale-98 cursor-pointer"
+            >
+              Sign In with Google
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          )}
         </div>
 
         {/* Mobile menu trigger */}
@@ -102,11 +112,11 @@ export function Navbar() {
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
-                navigate('/dashboard');
+                navigate(currentUser ? '/dashboard' : '/login');
               }}
               className="w-full inline-flex justify-center items-center gap-2 py-3 bg-[#23866B] text-white font-semibold rounded-xl"
             >
-              Dashboard
+              {currentUser ? 'Dashboard' : 'Sign In with Google'}
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>

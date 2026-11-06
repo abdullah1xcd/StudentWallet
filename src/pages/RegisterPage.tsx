@@ -54,10 +54,12 @@ export function RegisterPage() {
       navigate('/dashboard');
     } catch (err: any) {
       let msg = 'Failed to create account. Please try again.';
-      if (err.code === 'auth/email-already-in-use') {
-        msg = 'An account with this email address already exists.';
+      if (err.code === 'auth/operation-not-allowed') {
+        msg = 'Email/Password sign-in is not enabled in your Firebase Console yet. Please enable it under Firebase Console -> Authentication -> Sign-in method.';
+      } else if (err.code === 'auth/email-already-in-use') {
+        msg = 'An account with this email address already exists. Please sign in instead.';
       } else if (err.code === 'auth/weak-password') {
-        msg = 'The password is too weak. Please use letters and numbers.';
+        msg = 'The password is too weak. Please use at least 8 characters with letters and numbers.';
       } else if (err.message) {
         msg = err.message;
       }

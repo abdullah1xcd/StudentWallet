@@ -71,8 +71,10 @@ export function LoginPage() {
       navigate(from, { replace: true });
     } catch (err: any) {
       let msg = 'Failed to sign in. Please verify your email and password.';
-      if (err.code === 'auth/invalid-credential' || err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password') {
-        msg = 'Invalid email or password. Please try again.';
+      if (err.code === 'auth/operation-not-allowed') {
+        msg = 'Email/Password sign-in is not enabled in your Firebase Console yet. Please enable it under Firebase Console -> Authentication -> Sign-in method.';
+      } else if (err.code === 'auth/invalid-credential' || err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password') {
+        msg = 'Invalid email or password. Please check your credentials or click below to register.';
       } else if (err.code === 'auth/too-many-requests') {
         msg = 'Too many failed login attempts. Please reset your password or try again later.';
       } else if (err.message) {

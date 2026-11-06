@@ -54,31 +54,37 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    let hasAttemptedAuto = false;
+    let isMounted = true;
+
+    // Safety timeout: ensure loading state never hangs indefinitely under network/auth provider delays
+    const safetyTimer = setTimeout(() => {
+      if (isMounted) {
+        setLoading(false);
+      }
+    }, 4000);
 
     const unsubscribe = onAuthStateChanged(auth, async user => {
+      if (!isMounted) return;
       setCurrentUser(user);
       if (user) {
-        await fetchProfile(user);
-        setLoading(false);
+        try {
+          await fetchProfile(user);
+        } catch (e) {
+          console.error('Error fetching profile:', e);
+        } finally {
+          if (isMounted) setLoading(false);
+        }
       } else {
         setProfile(null);
-        const isManualLogout = sessionStorage.getItem('studentwallet_manual_signout') === 'true';
-        if (!isManualLogout && !hasAttemptedAuto) {
-          hasAttemptedAuto = true;
-          try {
-            await autoSignInDefaultStudent();
-            // onAuthStateChanged will trigger with the newly signed in user
-            return;
-          } catch (e) {
-            console.warn('Auto sign-in attempt completed without session:', e);
-          }
-        }
-        setLoading(false);
+        if (isMounted) setLoading(false);
       }
     });
 
-    return () => unsubscribe();
+    return () => {
+      isMounted = false;
+      clearTimeout(safetyTimer);
+      unsubscribe();
+    };
   }, [fetchProfile]);
 
   const refreshProfile = useCallback(async () => {

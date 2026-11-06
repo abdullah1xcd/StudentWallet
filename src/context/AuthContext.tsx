@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
 import { auth } from '../services/firebase';
-import { getUserProfile, updateUserProfile, autoSignInDefaultStudent } from '../services/authService';
+import { getUserProfile, updateUserProfile } from '../services/authService';
 import { initializeDefaultCategories } from '../services/categoryService';
 import { UserProfile, CurrencyCode } from '../types';
 
@@ -12,7 +12,6 @@ interface AuthContextType {
   loading: boolean;
   refreshProfile: () => Promise<void>;
   updateCurrency: (newCurrency: CurrencyCode) => Promise<void>;
-  autoSignIn: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -24,10 +23,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const fetchProfile = useCallback(async (user: FirebaseUser) => {
     try {
-      let p = await getUserProfile(user.uid);
-      if (!p) {
-        // Fallback profile if record wasn't present
-        p = {
+      let userProfile = await getUserProfile(user.uid);
+
+      if (!userProfile) {
+        userProfile = {
           uid: user.uid,
           fullName: user.displayName || user.email?.split('@')[0] || 'Student',
           email: user.email || '',
@@ -36,49 +35,49 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           createdAt: new Date().toISOString(),
         };
       }
-      setProfile(p);
-      // Auto-initialize categories if newly created
+
+      setProfile(userProfile);
       await initializeDefaultCategories(user.uid);
     } catch (err) {
       console.error('Failed to load profile or initialize categories:', err);
-    }
-  }, []);
-
-  const handleAutoSignIn = useCallback(async () => {
-    try {
-      sessionStorage.removeItem('studentwallet_manual_signout');
-      await autoSignInDefaultStudent();
-    } catch (e) {
-      console.error('Auto sign-in execution failed:', e);
+      // Keep the authenticated session usable even if profile/category loading fails.
     }
   }, []);
 
   useEffect(() => {
-    let hasAttemptedAuto = false;
+    let isActive = true;
 
     const unsubscribe = onAuthStateChanged(auth, async user => {
+      if (!isActive) return;
+
       setCurrentUser(user);
-      if (user) {
-        await fetchProfile(user);
-        setLoading(false);
-      } else {
+
+      if (!user) {
         setProfile(null);
-        const isManualLogout = sessionStorage.getItem('studentwallet_manual_signout') === 'true';
-        if (!isManualLogout && !hasAttemptedAuto) {
-          hasAttemptedAuto = true;
-          try {
-            await autoSignInDefaultStudent();
-            // onAuthStateChanged will trigger with the newly signed in user
-            return;
-          } catch (e) {
-            console.warn('Auto sign-in attempt completed without session:', e);
-          }
-        }
+        setLoading(false);
+        return;
+      }
+
+      setLoading(true);
+      try {
+        await fetchProfile(user);
+      } finally {
+        // Always release the loading screen, even if Firestore/profile setup fails.
+        if (isActive) setLoading(false);
+      }
+    }, error => {
+      console.error('Authentication state listener failed:', error);
+      if (isActive) {
+        setCurrentUser(null);
+        setProfile(null);
         setLoading(false);
       }
     });
 
-    return () => unsubscribe();
+    return () => {
+      isActive = false;
+      unsubscribe();
+    };
   }, [fetchProfile]);
 
   const refreshProfile = useCallback(async () => {
@@ -107,7 +106,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         loading,
         refreshProfile,
         updateCurrency,
-        autoSignIn: handleAutoSignIn,
       }}
     >
       {children}

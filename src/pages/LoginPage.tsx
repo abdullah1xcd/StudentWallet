@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Wallet, Eye, EyeOff, Loader2, ArrowRight } from 'lucide-react';
-import { loginWithEmail, loginWithGoogle, DEFAULT_STUDENT_EMAIL, DEFAULT_STUDENT_PASS } from '../services/authService';
+import { loginWithEmail, loginWithGoogle } from '../services/authService';
 import { useToast } from '../context/ToastContext';
 import { useAuth } from '../context/AuthContext';
 
@@ -19,10 +19,9 @@ export function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
-  const [isAutoLoading, setIsAutoLoading] = useState(false);
 
   const { showToast } = useToast();
-  const { currentUser, autoSignIn } = useAuth();
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -38,30 +37,10 @@ export function LoginPage() {
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
-    defaultValues: {
-      email: DEFAULT_STUDENT_EMAIL,
-      password: DEFAULT_STUDENT_PASS,
-    },
   });
-
-  const handleInstantAutoSignIn = async () => {
-    setIsAutoLoading(true);
-    setAuthError(null);
-    try {
-      await autoSignIn();
-      showToast('Signed in automatically as Abdullah Mohamed Haroon!', 'success');
-      navigate(from, { replace: true });
-    } catch (err: any) {
-      setAuthError(err.message || 'Auto sign-in failed');
-      showToast(err.message || 'Auto sign-in failed', 'error');
-    } finally {
-      setIsAutoLoading(false);
-    }
-  };
 
   const onSubmit = async (data: LoginFormData) => {
     setAuthError(null);
@@ -132,36 +111,11 @@ export function LoginPage() {
             </div>
           )}
 
-          {/* Auto Sign-In Banner */}
-          <div className="p-4 bg-[#F5F3ED] border border-[#EAE8E1] rounded-2xl space-y-2.5">
-            <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#23866B]">
-                Connected Firebase Account
-              </span>
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-[#23866B] text-white">
-                AUTO
-              </span>
-            </div>
-            <div>
-              <p className="text-sm font-bold text-[#202B29]">Abdullah Mohamed Haroon</p>
-              <p className="text-xs text-[#78877F] font-mono">abdullahmohamedharoon8@gmail.com</p>
-            </div>
-            <button
-              type="button"
-              onClick={handleInstantAutoSignIn}
-              disabled={isAutoLoading || isSubmitting}
-              className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 bg-[#23866B] hover:bg-[#1C6C56] text-white text-xs font-bold rounded-xl shadow-xs hover:shadow-md transition-all active:scale-98 disabled:opacity-50"
-            >
-              {isAutoLoading && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
-              Sign In to My Account Instantly
-            </button>
-          </div>
-
           {/* Google Sign-in */}
           <button
             type="button"
             onClick={handleGoogleLogin}
-            disabled={isGoogleLoading || isSubmitting || isAutoLoading}
+            disabled={isGoogleLoading || isSubmitting}
             className="w-full inline-flex justify-center items-center gap-3 py-2.5 px-4 border border-[#EAE8E1] rounded-xl shadow-2xs bg-white text-sm font-semibold text-[#202B29] hover:bg-[#F5F3ED] transition-colors disabled:opacity-50"
           >
             {isGoogleLoading ? (

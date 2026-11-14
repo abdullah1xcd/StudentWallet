@@ -108,8 +108,8 @@ users/{userId}
 ## 5. Getting Started & Local Development
 
 ### Prerequisites
-- Node.js (v18 or higher)
-- npm or yarn
+- Bun (latest stable) — the repository includes `bun.lock`
+- Git
 
 ### Installation
 
@@ -121,7 +121,7 @@ users/{userId}
 
 2. Install dependencies:
    ```bash
-   npm install
+   bun install --frozen-lockfile
    ```
 
 3. Configure Firebase:
@@ -130,7 +130,7 @@ users/{userId}
 
 4. Start development server:
    ```bash
-   npm run dev
+   bun run dev
    ```
    Open your browser at `http://localhost:3000`.
 
@@ -138,10 +138,12 @@ users/{userId}
 
 ## 6. Running Automated Tests
 
+The repository uses **Vitest** for automated unit tests. The `test` script runs `vitest run`, and the `lint` script runs the TypeScript compiler with `tsc --noEmit`.
+
 Run the test suite verifying all 12 core financial calculation scenarios:
 
 ```bash
-npm test
+bun run test
 ```
 
 ### BDD Scenarios
@@ -156,7 +158,7 @@ Gherkin feature specifications are located in `/features/`:
 Build the optimized production bundle:
 
 ```bash
-npm run build
+bun run build
 ```
 
 The compiled assets will be output to the `dist/` folder, ready for deployment to Firebase Hosting, Cloud Run, Vercel, or Netlify.

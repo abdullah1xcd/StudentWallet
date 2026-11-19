@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1180" viewBox="0 0 1800 1180">
+<defs>
+  <style>
+    .bg{fill:#f7f8fc}.title{font:700 42px Arial,sans-serif;fill:#182230}.sub{font:20px Arial,sans-serif;fill:#526174}
+    .head{font:700 22px Arial,sans-serif;fill:#182230}.task{font:17px Arial,sans-serif;fill:#263548}.small{font:15px Arial,sans-serif;fill:#526174}
+    .activity{fill:#e8eef8;stroke:#cbd6e6;stroke-width:2}.mvp{fill:#edf7f0;stroke:#b6d8c1;stroke-width:2}.later{fill:#fff4e8;stroke:#e8c99f;stroke-width:2}
+    .card{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}.line{stroke:#c0392b;stroke-width:6;stroke-dasharray:16 10}
+  </style>
+</defs>
+<rect class="bg" width="1800" height="1180"/>
+<text x="70" y="75" class="title">StudentWallet — User Story Map</text>
+<text x="70" y="112" class="sub">Backbone activities → user tasks → release slices | Jira project SW | 15 stories / 45 points</text>
+<rect x="70" y="150" width="1660" height="78" rx="14" class="activity"/>
+<text x="95" y="181" class="head">User goal</text>
+<text x="95" y="208" class="task">As a university student, I want to manage my money, understand my spending, and stay within my monthly budget.</text>
+
+<!-- Activity headers -->
+<g>
+<rect x="70" y="255" width="255" height="94" rx="12" class="activity"/><text x="90" y="292" class="head">1. Access wallet</text><text x="90" y="322" class="small">Create and access account</text>
+<rect x="345" y="255" width="525" height="94" rx="12" class="activity"/><text x="365" y="292" class="head">2. Manage transactions</text><text x="365" y="322" class="small">Record and review money movement</text>
+<rect x="890" y="255" width="255" height="94" rx="12" class="activity"/><text x="910" y="292" class="head">3. Organize</text><text x="910" y="322" class="small">Classify transactions</text>
+<rect x="1165" y="255" width="270" height="94" rx="12" class="activity"/><text x="1185" y="292" class="head">4. Control budget</text><text x="1185" y="322" class="small">Set limits and alerts</text>
+<rect x="1455" y="255" width="275" height="94" rx="12" class="activity"/><text x="1475" y="292" class="head">5. Understand & export</text><text x="1475" y="322" class="small">Review and use reports</text>
+</g>
+
+<!-- MVP row cards -->
+<g>
+<rect x="70" y="375" width="255" height="390" rx="12" class="mvp"/>
+<text x="90" y="411" class="head">MVP slice</text>
+<rect x="88" y="435" width="219" height="82" rx="9" class="card"/><text x="105" y="466" class="task">SW-5 · Register / sign in</text><text x="105" y="493" class="small">5 pts · Must-have</text>
+
+<rect x="345" y="375" width="525" height="390" rx="12" class="mvp"/>
+<text x="365" y="411" class="head">MVP slice</text>
+<rect x="363" y="435" width="235" height="82" rx="9" class="card"/><text x="380" y="466" class="task">SW-7 · Add income</text><text x="380" y="493" class="small">3 pts · Must-have</text>
+<rect x="615" y="435" width="235" height="82" rx="9" class="card"/><text x="632" y="466" class="task">SW-8 · Add expense</text><text x="632" y="493" class="small">3 pts · Must-have</text>
+<rect x="363" y="535" width="235" height="82" rx="9" class="card"/><text x="380" y="566" class="task">SW-11 · History</text><text x="380" y="593" class="small">3 pts · Must-have</text>
+<rect x="615" y="535" width="235" height="82" rx="9" class="card"/><text x="632" y="566" class="task">SW-9 · Edit transaction</text><text x="632" y="593" class="small">2 pts · Must-have</text>
+<rect x="363" y="635" width="235" height="82" rx="9" class="card"/><text x="380" y="666" class="task">SW-10 · Delete</text><text x="380" y="693" class="small">2 pts · Must-have</text>
+<rect x="615" y="635" width="235" height="82" rx="9" class="card"/><text x="632" y="666" class="task">SW-12 · Filter</text><text x="632" y="693" class="small">3 pts · Should-have</text>
+
+<rect x="890" y="375" width="255" height="390" rx="12" class="mvp"/>
+<text x="910" y="411" class="head">MVP slice</text>
+<rect x="908" y="435" width="219" height="82" rx="9" class="card"/><text x="925" y="466" class="task">SW-13 · Default categories</text><text x="925" y="493" class="small">2 pts · Must-have</text>
+<rect x="908" y="535" width="219" height="82" rx="9" class="card"/><text x="925" y="566" class="task">SW-14 · Custom category</text><text x="925" y="593" class="small">3 pts · Should-have</text>
+
+<rect x="1165" y="375" width="270" height="390" rx="12" class="mvp"/>
+<text x="1185" y="411" class="head">MVP slice</text>
+<rect x="1183" y="435" width="234" height="72" rx="9" class="card"/><text x="1200" y="463" class="task">SW-15 · Set limit</text><text x="1200" y="488" class="small">3 pts · Must-have</text>
+<rect x="1183" y="520" width="234" height="72" rx="9" class="card"/><text x="1200" y="548" class="task">SW-16 · 80% warning</text><text x="1200" y="573" class="small">3 pts · Must-have</text>
+<rect x="1183" y="605" width="234" height="72" rx="9" class="card"/><text x="1200" y="633" class="task">SW-17 · 100% alert</text><text x="1200" y="658" class="small">2 pts · Must-have</text>
+
+<rect x="1455" y="375" width="275" height="390" rx="12" class="mvp"/>
+<text x="1475" y="411" class="head">MVP slice</text>
+<rect x="1473" y="435" width="239" height="82" rx="9" class="card"/><text x="1490" y="466" class="task">SW-18 · Monthly summary</text><text x="1490" y="493" class="small">5 pts · Must-have</text>
+</g>
+
+<!-- MVP line -->
+<line x1="70" y1="795" x2="1730" y2="795" class="line"/>
+<rect x="730" y="775" width="340" height="42" rx="10" fill="#c0392b"/>
+<text x="900" y="803" text-anchor="middle" style="font:700 20px Arial,sans-serif;fill:white">MVP LINE — FIRST RELEASE</text>
+
+<!-- Later row -->
+<g>
+<rect x="70" y="835" width="1660" height="230" rx="14" class="later"/>
+<text x="95" y="875" class="head">After MVP / Future enhancements</text>
+<rect x="105" y="905" width="440" height="105" rx="10" class="card"/><text x="130" y="944" class="task">SW-6 · Google Sign-In</text><text x="130" y="975" class="small">3 pts · Should-have · Sprint 4</text>
+<rect x="575" y="905" width="440" height="105" rx="10" class="card"/><text x="600" y="944" class="task">SW-19 · Export transactions to CSV</text><text x="600" y="975" class="small">3 pts · Could-have · Sprint 4</text>
+<text x="1080" y="944" class="task">Proposed MVP: 39 points</text><text x="1080" y="975" class="small">Deferred scope: 6 points</text>
+</g>
+<text x="70" y="1125" class="small">Note: proposed release slice based on current Jira priorities and sprint assignments; confirm with the team and Product Owner before final submission.</text>
+</svg>

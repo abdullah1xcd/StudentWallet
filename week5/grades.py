@@ -1,4 +1,8 @@
+"""Grade calculation kata used in the Week 5 exercise."""
+
+
 def calculate_grade(scores):
+    """Return the letter grade for the arithmetic mean of the scores."""
     total = 0
     for score in scores:
         total = total + score
@@ -6,11 +10,10 @@ def calculate_grade(scores):
 
     if average >= 90:
         return "A"
-    elif average >= 80:
+    if average >= 80:
         return "B"
-    elif average >= 70:
+    if average >= 70:
         return "C"
-    elif average >= 60:
+    if average >= 60:
         return "D"
-    else:
-        return "F"
+    return "F"

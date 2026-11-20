@@ -25,7 +25,6 @@ def test_invoice_total_is_characterized(student, kind, expected, tmp_path, monke
     assert make_invoice(student, kind) == expected
 
 
-
 class FakeWriter:
     def __init__(self):
         self.saved = {}

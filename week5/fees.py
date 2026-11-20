@@ -6,13 +6,14 @@ MAX_FEE = 100
 
 
 def calculate_fee(amount: float, is_member: bool = False, late_days: int = 0) -> float:
-    """Calculate a fee using the legacy order of discount, late fee, cap, rounding.
+    """Calculate a fee using discount, late fee, cap, then rounding.
 
-    Negative amounts are invalid. As in the original implementation, zero or
-    negative late_days do not add a late fee.
+    Negative amounts and negative late_days are invalid inputs.
     """
     if amount < 0:
         raise ValueError("amount cannot be negative")
+    if late_days < 0:
+        raise ValueError("late_days cannot be negative")
 
     fee = amount
     if is_member:

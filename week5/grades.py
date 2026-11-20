@@ -2,11 +2,15 @@
 
 
 def calculate_grade(scores):
-    """Return the letter grade for the arithmetic mean of the scores."""
-    total = 0
-    for score in scores:
-        total = total + score
-    average = total / len(scores)
+    """Return the letter grade for the arithmetic mean of the scores.
+
+    Raises:
+        ValueError: If no scores are provided.
+    """
+    if not scores:
+        raise ValueError("scores cannot be empty")
+
+    average = sum(scores) / len(scores)
 
     if average >= 90:
         return "A"

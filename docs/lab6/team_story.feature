@@ -1,24 +1,25 @@
-Feature: Add an expense to StudentWallet
-  As an authenticated university student
-  I want to record an expense
-  So that my balance and monthly spending reflect my purchases
+Feature: Add an income transaction (SW-7)
+  As a student
+  I want to record income in EGP
+  So that my wallet balance is up to date
 
-  Scenario: Save a valid expense and update the dashboard
-    Given the student is authenticated with UID "student_123"
-    And the initial monthly expense total is "0 EGP"
-    When the student adds an expense of "150 EGP" for category "Food" with description "Cafeteria Lunch"
-    Then the expense should be saved in Firestore under "/users/student_123/transactions"
-    And the dashboard expense total should increase by "150 EGP"
-    And the student should see a success toast notification "Transaction saved successfully!"
+  Scenario: Save a valid income transaction
+    Given the student is authenticated
+    And the current income total is "0.00 EGP"
+    When the student records income of "500" EGP dated "2026-11-20" in category "Allowance" with note "Monthly allowance"
+    Then the income is saved with amount "500.00 EGP"
+    And the income appears in the transaction list
+    And the income total increases to "500.00 EGP"
 
-  Scenario: Reject an expense with a negative amount
-    Given the student is authenticated with UID "student_123"
-    When the student submits an expense with amount "-50 EGP"
-    Then the validation system should block the submission with "Amount must be greater than zero"
-    And no document should be created in Firestore
+  Scenario: Refuse an income amount that is not greater than zero
+    Given the student is authenticated
+    When the student attempts to record income of "0" EGP
+    Then the income submission is rejected with "Amount must be greater than zero"
+    And no income transaction is saved
 
-  Scenario: Reject an expense with a zero amount
-    Given the student is authenticated with UID "student_123"
-    When the student submits an expense with amount "0 EGP"
-    Then the validation system should block the submission with "Amount must be greater than zero"
-    And no document should be created in Firestore
+  Scenario: Store a fractional income amount to exactly two decimal places
+    Given the student is authenticated
+    When the student records income of "125.5" EGP dated "2026-11-20" in category "Part-time Job" without a note
+    Then the income is saved with amount "125.50 EGP"
+    And the income appears in the transaction list
+    And the income total increases by "125.50 EGP"

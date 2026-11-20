@@ -1,12 +1,12 @@
-"""Characterization tests for the Week 5 fee calculator."""
+"""Unit tests for the Week 5 fee calculator."""
 
 import unittest
 
 from fees import calculate_fee
 
 
-class FeeCharacterizationTests(unittest.TestCase):
-    """Verify the fee calculation rules and edge cases."""
+class FeeCalculatorTests(unittest.TestCase):
+    """Verify fee calculation rules and edge cases."""
 
     def test_regular_fee_is_unchanged(self):
         """A regular fee is returned without adjustment."""

@@ -63,4 +63,4 @@ ruff check --select C901 --config "lint.mccabe.max-complexity=1" invoice.py
 
 ## Part D — StudentWallet story
 
-See `team_story.feature`. It is based on the existing Add Expense behavior already specified in the repository's `features/add_expense.feature`. The repository's visible feature file does not expose a backlog story ID, so no story ID is invented here.
+See `team_story.feature`. It covers **SW-7 — Add an income transaction**, a Must-have story planned for Sprint 1 in `docs/week4/stories.md`. The three scenarios cover the happy path, a refused zero-amount submission, and two-decimal precision with an optional note omitted.

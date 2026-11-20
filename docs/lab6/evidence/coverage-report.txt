@@ -1,0 +1,9 @@
+$ python -m pytest --cov=registration --cov-report=term-missing
+
+Name              Stmts   Miss  Cover   Missing
+-----------------------------------------------
+registration.py      19      0   100%
+-----------------------------------------------
+TOTAL                19      0   100%
+
+Result: 10 passed in 0.09s (local verification environment, Python 3.13.5).

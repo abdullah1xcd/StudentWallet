@@ -27,6 +27,13 @@ it with inclusive lower-bound comparisons (`>=`). The intended scale is A for
 - **Weak contract:** accepted score types and valid range are undocumented and unchecked.
 - **Insufficient edge-case coverage:** tests focus on representative averages, not exact cutoffs.
 
+## Fee calculator validation decision
+
+Negative `late_days` is now rejected with `ValueError("late_days cannot be negative")`,
+and a regression test verifies this behavior. This is an explicit input-validation
+decision made during review; because the original `fees.py` was unavailable, it is
+not presented as behavior preserved from a legacy implementation.
+
 ## Pair review prompts
 
 1. Does the agreed grading scale treat each lower boundary as inclusive?

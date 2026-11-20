@@ -1,32 +1,32 @@
 WEEK 5 — PRE-REFACTOR QUALITY CHECK
 ==================================
 
-Scope
------
-The pre-refactor Fee Calculator was a single function with inline policy values
-(10% member discount, 2 units per late day, and a 100-unit maximum). The
-refactored implementation is week5/fees.py. The Grade Calculator Kata is
-separate; its boundary bug is documented in findings.md and fixed in grades.py.
+Status: BASELINE LINT EVIDENCE NOT YET AVAILABLE
 
-The baseline Ruff and Pylint checks must be run against the original fee implementation
-before the refactoring commit. The commands are listed below:
+The PR history shows that week5/fees.py was added by the refactoring commit;
+the parent commit does not contain that file. The repository documentation
+describes the original implementation as one function with inline policy
+values (10% member discount, 2 units per late day, and a 100-unit maximum),
+but does not preserve the original source file.
 
-    python -m unittest discover -s week5 -p 'test_fees.py' -v
-    ruff check week5/fees.py week5/test_fees.py
-    pylint week5/fees.py week5/test_fees.py
+Therefore, running Ruff or Pylint against the current week5/fees.py would
+measure the REFACTORED implementation, not the pre-refactoring baseline.
+No baseline output is claimed here, and no lint results have been fabricated.
 
-Execution note
---------------
-Ruff and Pylint were not installed in the environment used to prepare this
-starter deliverable, and package installation was unavailable (no network/DNS).
-Therefore no Ruff/Pylint findings are fabricated here. Replace this note with
-the real command output from your machine before submitting the assignment.
+To complete this evidence:
+1. Recover the exact original Fee Calculator function from the Week 5 starter
+   code, assignment handout, or the author's local history.
+2. Save it as a separate baseline file without refactoring it.
+3. Run the following commands against that baseline file and preserve the
+   complete terminal output (including tool versions):
 
-Suggested setup (run locally):
-    python -m pip install ruff pylint
+       python --version
+       ruff --version
+       pylint --version
+       ruff check PATH_TO_ORIGINAL_FEES_FILE
+       pylint PATH_TO_ORIGINAL_FEES_FILE
 
-The commands could not be executed in the preparation environment. Do not
-submit this placeholder as a completed lint result: install the tools locally,
-check out the parent commit or reconstruct the original fees.py from the PR
-commit history, run both lint commands against that pre-refactor file, then
-replace this note with the complete terminal output and tool versions.
+4. Replace this status note with the actual command output.
+
+The current refactored implementation is checked separately by the Week 5
+Python CI workflow. Do not present those results as pre-refactoring evidence.

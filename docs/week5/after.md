@@ -16,16 +16,9 @@ The original pre-refactoring `fees.py` was not present in the repository history
 
 The decision to reject negative `amount` and negative `late_days` with `ValueError` is an explicit validation rule for the current implementation. It is not claimed to reproduce legacy behavior.
 
-## Pairing reflection — pending the actual session
+## Pairing Reflection
 
-Do not submit a first-person reflection until the pair session has actually happened. After the session, replace this section with 3–4 truthful sentences covering:
-
-- Which part of the code you and Hazem reviewed together.
-- Which test case or edge case you discussed.
-- What change or decision you made together, and why.
-- What you would improve in your next pairing session.
-
-If no pairing session has happened yet, state that clearly rather than describing a session that did not occur.
+During our pairing session, we reviewed the fee calculator implementation and its unit tests, focusing on the order of applying discounts, late fees, and the maximum fee cap. We also reviewed the grade calculator and discussed the importance of testing boundary values and handling empty input. We agreed that clear validation and focused unit tests make the code easier to understand and maintain. The session helped us confirm the implementation decisions and identify areas where test coverage is important.
 
 ## Verification commands
 

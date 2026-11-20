@@ -1,0 +1,32 @@
+WEEK 5 — PRE-REFACTOR QUALITY CHECK
+==================================
+
+Status: BASELINE LINT EVIDENCE NOT YET AVAILABLE
+
+The PR history shows that week5/fees.py was added by the refactoring commit;
+the parent commit does not contain that file. The repository documentation
+describes the original implementation as one function with inline policy
+values (10% member discount, 2 units per late day, and a 100-unit maximum),
+but does not preserve the original source file.
+
+Therefore, running Ruff or Pylint against the current week5/fees.py would
+measure the REFACTORED implementation, not the pre-refactoring baseline.
+No baseline output is claimed here, and no lint results have been fabricated.
+
+To complete this evidence:
+1. Recover the exact original Fee Calculator function from the Week 5 starter
+   code, assignment handout, or the author's local history.
+2. Save it as a separate baseline file without refactoring it.
+3. Run the following commands against that baseline file and preserve the
+   complete terminal output (including tool versions):
+
+       python --version
+       ruff --version
+       pylint --version
+       ruff check PATH_TO_ORIGINAL_FEES_FILE
+       pylint PATH_TO_ORIGINAL_FEES_FILE
+
+4. Replace this status note with the actual command output.
+
+The current refactored implementation is checked separately by the Week 5
+Python CI workflow. Do not present those results as pre-refactoring evidence.

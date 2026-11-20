@@ -1,0 +1,43 @@
+"""Unit tests for the Week 5 fee calculator."""
+
+import unittest
+
+from fees import calculate_fee
+
+
+class FeeCalculatorTests(unittest.TestCase):
+    """Verify fee calculation rules and edge cases."""
+
+    def test_regular_fee_is_unchanged(self):
+        """A regular fee is returned without adjustment."""
+        self.assertEqual(calculate_fee(40), 40)
+
+    def test_member_discount_is_applied_before_late_fee(self):
+        """Apply the member discount before adding late fees."""
+        self.assertEqual(calculate_fee(100, is_member=True, late_days=2), 94)
+
+    def test_late_fee_is_two_per_day(self):
+        """Add two units for each positive late day."""
+        self.assertEqual(calculate_fee(40, late_days=3), 46)
+
+    def test_fee_is_capped_after_discount_and_late_fee(self):
+        """Apply the maximum cap after discount and late fees."""
+        self.assertEqual(calculate_fee(120, is_member=True, late_days=2), 100)
+
+    def test_negative_late_days_are_rejected(self):
+        """Reject negative late_days as an explicit validation rule."""
+        with self.assertRaisesRegex(ValueError, "late_days cannot be negative"):
+            calculate_fee(40, late_days=-2)
+
+    def test_result_is_rounded_to_two_decimal_places(self):
+        """Round the final fee to two decimal places."""
+        self.assertEqual(calculate_fee(10.005), 10.01)
+
+    def test_negative_amount_is_rejected(self):
+        """Reject a negative amount with ValueError."""
+        with self.assertRaisesRegex(ValueError, "amount cannot be negative"):
+            calculate_fee(-1)
+
+
+if __name__ == "__main__":
+    unittest.main()

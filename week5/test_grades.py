@@ -20,6 +20,11 @@ class GradeCalculatorTests(unittest.TestCase):
         """An average in the seventies receives a C."""
         self.assertEqual(calculate_grade([75, 76, 77]), "C")
 
+    def test_empty_scores_are_rejected(self):
+        """An empty score list raises a clear validation error."""
+        with self.assertRaisesRegex(ValueError, "scores cannot be empty"):
+            calculate_grade([])
+
     def test_exactly_ninety_is_an_a(self):
         """The exact 90-point boundary receives an A."""
         self.assertEqual(calculate_grade([90]), "A")

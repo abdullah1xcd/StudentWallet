@@ -23,3 +23,25 @@ def student():
 def test_invoice_total_is_characterized(student, kind, expected, tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
     assert make_invoice(student, kind) == expected
+
+
+
+class FakeWriter:
+    def __init__(self):
+        self.saved = {}
+
+    def write(self, student_id, text):
+        self.saved[student_id] = text
+
+
+def test_invoice_uses_injected_writer(student):
+    fake = FakeWriter()
+    make_invoice(student, "regular", writer=fake)
+    assert fake.saved["2023001"] == "Invoice for 2023001: 7200 EGP"
+
+
+def test_sibling_policy_applies_25_percent_discount(student):
+    fake = FakeWriter()
+    total = make_invoice(student, "sibling", writer=fake)
+    assert total == 5400
+    assert fake.saved["2023001"] == "Invoice for 2023001: 5400 EGP"

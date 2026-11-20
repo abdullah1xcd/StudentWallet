@@ -13,7 +13,7 @@ python -m venv .venv
 # macOS/Linux:
 source .venv/bin/activate
 
-python -m pip install pytest pytest-cov behave ruff
+python -m pip install -r requirements.txt
 ```
 
 ## Part A — TDD

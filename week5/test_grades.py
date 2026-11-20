@@ -29,6 +29,10 @@ class GradeCalculatorTests(unittest.TestCase):
         """The exact 90-point boundary receives an A."""
         self.assertEqual(calculate_grade([90]), "A")
 
+    def test_89_is_a_b(self):
+        """A score immediately below 90 receives a B."""
+        self.assertEqual(calculate_grade([89]), "B")
+
     def test_exactly_eighty_is_a_b(self):
         """The exact 80-point boundary receives a B."""
         self.assertEqual(calculate_grade([80]), "B")

@@ -43,12 +43,11 @@ The feature includes registration, limit, duplicate, outline examples, and the r
 
 | Smell | Where | Principle / impact |
 |---|---|---|
-| Long conditional chain | `make_invoice` branches on `kind` | OCP: adding a fee type requires editing the function |
-| Magic numbers | 1200, 2000, 5000, and 0.5 | Readability/maintainability: fee rules are hidden in literals |
-| Multiple responsibilities | Calculation, formatting, file I/O, and printing in one function | SRP: several independent reasons to change |
-| Direct file dependency | Function opens and writes a disk file itself | DIP: cannot substitute an in-memory writer cleanly |
-| Manual resource handling | `open` / `write` / `close` without a context manager | Reliability: file may not close if an exception occurs |
-| Repeated per-course calculation | Loops through courses to calculate a total based only on total hours | DRY/readability: unnecessary repeated logic |
+| Long conditional chain | Legacy invoice logic selects fee calculations with branches based on the customer type | OCP: each new fee type requires changing the selection logic |
+| Magic numbers | Fee rates, service fee, and discount percentages are embedded in calculations | Readability/maintainability: business rules are difficult to identify and update |
+| Multiple responsibilities | The legacy invoice function calculates fees, formats invoice text, and writes the file | SRP: calculation and output have different reasons to change |
+| Tight coupling to file system | The legacy function writes directly to a disk file instead of depending on a writer abstraction | DIP/testability: tests cannot replace file output with an in-memory writer |
+| Stringly typed policy selection | Customer type is represented by a raw string such as `"regular"` or `"scholarship"` | Reliability: misspelled values can cause lookup failures; a policy registry centralizes selection |
 
 ## Part C — Refactoring and SiblingPolicy (Task C2)
 

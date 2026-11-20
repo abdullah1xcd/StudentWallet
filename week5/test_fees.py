@@ -6,7 +6,7 @@ from fees import calculate_fee
 
 
 class FeeCharacterizationTests(unittest.TestCase):
-    """Verify the legacy fee rules and edge cases."""
+    """Verify the fee calculation rules and edge cases."""
 
     def test_regular_fee_is_unchanged(self):
         """A regular fee is returned without adjustment."""
@@ -24,9 +24,10 @@ class FeeCharacterizationTests(unittest.TestCase):
         """Apply the maximum cap after discount and late fees."""
         self.assertEqual(calculate_fee(120, is_member=True, late_days=2), 100)
 
-    def test_negative_late_days_do_not_add_a_fee(self):
-        """Negative late-day values do not add a fee."""
-        self.assertEqual(calculate_fee(40, late_days=-2), 40)
+    def test_negative_late_days_are_rejected(self):
+        """Reject negative late_days as an explicit validation rule."""
+        with self.assertRaisesRegex(ValueError, "late_days cannot be negative"):
+            calculate_fee(40, late_days=-2)
 
     def test_result_is_rounded_to_two_decimal_places(self):
         """Round the final fee to two decimal places."""
@@ -34,7 +35,7 @@ class FeeCharacterizationTests(unittest.TestCase):
 
     def test_negative_amount_is_rejected(self):
         """Reject a negative amount with ValueError."""
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, "amount cannot be negative"):
             calculate_fee(-1)
 
 
